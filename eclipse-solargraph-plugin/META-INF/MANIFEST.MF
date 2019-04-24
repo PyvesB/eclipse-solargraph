@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ruby Solargraph
+Bundle-SymbolicName: io.github.pyvesb.eclipse_solargraph;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Activator: io.github.pyvesb.eclipse_solargraph.SolargraphPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.lsp4e;bundle-version="0.6.0",
+ org.eclipse.tm4e.languageconfiguration,
+ org.eclipse.tm4e.registry,
+ org.eclipse.tm4e.ui,
+ org.eclipse.ui.genericeditor;bundle-version="1.0.0",
+ org.eclipse.swt,
+ org.eclipse.jface,
+ org.eclipse.osgi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: io.github.pyvesb.eclipse_solargraph
+Bundle-ClassPath: .
