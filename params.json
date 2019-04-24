@@ -1,0 +1,6 @@
+{
+  "name": "Eclipse Solargraph",
+  "tagline": "Eclipse Ruby plugin based on the Solargraph language server.",
+  "body": "### Welcome to the Eclipse Solargraph update site!\r\nIt is recommended to download and install the plugin via the Eclipse Marketplace, but you can select *Help* -> *Install New Software* -> *Add...* and enter the address of this webpage in the *Location* field. Click *OK*, select the Ruby Solargraph plugin that appears in the list and move on with the installation!\r\n\r\n### Help, feature requests and issues\r\nSimply head to the [issues](https://github.com/PyvesB/eclipse-solargraph/issues) section and open a new issue. For more general information, simply go to the project [home](https://github.com/PyvesB/eclipse-solargraph).\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
