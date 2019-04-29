@@ -23,6 +23,20 @@
 <i><sub>Ruby edition with syntax highlighting and autocomplete. Other features such as code outline or searches are also available.</sub></i>
 </p>
 
+# Features at a glance
+
+* Rich syntax highlighting
+* Code completion
+* Rename refactoring
+* Find references
+* Jump to declaration
+* Code outline
+* Code folding
+* Documentation hovers, see the [Solargraph readme](https://github.com/castwide/solargraph#gem-support) for more information
+* Various other features part of the Language Server Protocol
+
+Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
+
 # Getting started
 
 #### :cd: Plugin installation
