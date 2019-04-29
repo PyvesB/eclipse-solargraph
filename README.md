@@ -8,6 +8,12 @@
 <a href="https://github.com/PyvesB/eclipse-solargraph/stargazers">
 <img src ="https://img.shields.io/github/stars/PyvesB/eclipse-solargraph.svg" />
 </a>
+<a href="https://marketplace.eclipse.org/content/eclipse-solargraph">
+<img src ="https://img.shields.io/eclipse-marketplace/v/ruby-solargraph.svg" />
+</a>
+<a href="https://marketplace.eclipse.org/content/eclipse-solargraph">
+<img src ="https://img.shields.io/eclipse-marketplace/favorites/ruby-solargraph.svg" />
+</a>
 
 **Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
 
@@ -21,9 +27,13 @@
 
 #### :cd: Plugin installation
 
-The plugin will still be published to the Eclipse Marketplace!
+You can download and install the plugin via the [Eclipse Marketplace](https://marketplace.eclipse.org/content/ruby-solargraph/), or simply drag the below button to your running Eclipse workspace:
 
-In the meantime, head to the [update site](https://pyvesb.github.io/eclipse-solargraph/) and follow the instructions listed there.
+<p align="center">
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=4611382" class="drag" title="Drag to your running Eclipse workspace. Requires Eclipse Marketplace Client"><img typeof="foaf:Image" class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png" alt="Drag to your running Eclipse workspace. Requires Eclipse Marketplace Client" /></a>
+</p>
+
+Alternatively, head to the [update site](https://pyvesb.github.io/eclipse-solargraph/) and follow the instructions listed there.
 
 #### :wrench: Setting your own working copy of the project
 
