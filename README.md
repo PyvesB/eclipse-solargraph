@@ -20,7 +20,7 @@
 <p align="center" style="font-size:5px">
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/screenshot.png?raw=true" />
 <br />
-<i><sub>Ruby edition with syntax highlighting and autocomplete. Other features such as code outline or searches are also available.</sub></i>
+<i><sub>Ruby edition with syntax highlighting and autocomplete. Many other features are also available.</sub></i>
 </p>
 
 # Features at a glance
@@ -55,7 +55,7 @@ Alternatively, head to the [update site](https://pyvesb.github.io/eclipse-solarg
 * Clone or download this repository. You can also create your own fork by clicking on the *Fork* icon on the top right of this page.
 * In Eclipse, go to `File` -> `Import...` -> `General` -> `Existing Projects into Workspace`.
 * In the `Select root directory` field, indicate the location where you checked out the eclipse-solargraph repository.
-* Select the projects that appear in the `Projects` field and click `Finish`.
+* Ensure `Search for nested projects` is enabled, select all projects in the `Projects` field and click `Finish`.
 * You're ready to go! You can now either launch an instance of Eclipse running the plugin by right-clicking on the plugin project and selecting `Run As` -> `Eclipse Application`, or you can export a plugin archive file by selecting `Export` -> `Deployable plug-ins and fragments`.
 
 # Contributing
@@ -75,7 +75,7 @@ Find the project useful, fun or interesting? **Star** the repository by clicking
 # Acknowledgements
 
 The following projects are used by this plugin:
-* [Solargraph](http://solargraph.org/) by [castwide](https://github.com/castwide): underlying language server (MIT License) and logo (CC BY-SA License).
+* [Solargraph](http://solargraph.org/) by [castwide](https://github.com/castwide): underlying language server (MIT License) and adapted marketplace logo (CC BY-SA License).
 * [LSP4E](https://projects.eclipse.org/projects/technology.lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
 * [VS Code](https://code.visualstudio.com/): TextMate language configuration (MIT License).
 * [TM4E](https://projects.eclipse.org/projects/technology.tm4e): TextMate support in the Eclipse IDE (Eclipse Public License).
