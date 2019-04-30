@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -47,6 +48,12 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 			updateSolargraph();
 		}
 		super.start();
+	}
+
+	@Override
+	public String toString() {
+		return "SolargraphStreamConnectionProvider [command=" + getCommands().stream().collect(Collectors.joining(" "))
+				+ ", directory=" + getWorkingDirectory() + "]";
 	}
 
 	private static List<String> getSolargraphCommand() {
