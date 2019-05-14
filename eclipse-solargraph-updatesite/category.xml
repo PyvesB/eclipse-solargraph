@@ -3,5 +3,5 @@
    <description name="Ruby Solargraph update site" url="https://pyvesb.github.io/eclipse-solargraph/">
       The Ruby Solargraph plugin update site.
    </description>
-   <feature url="features/io.github.pyvesb.eclipse_solargraph_0.1.0.201904261931.jar" id="io.github.pyvesb.eclipse_solargraph" version="0.1.0.201904261931"/>
+   <feature id="io.github.pyvesb.eclipse_solargraph"/>
 </site>
