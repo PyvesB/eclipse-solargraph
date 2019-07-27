@@ -7,17 +7,12 @@ import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
-import io.github.pyvesb.eclipse_solargraph.SolargraphPlugin;
-
 public class CommandJob extends Job {
-
-	private static final ILog LOGGER = SolargraphPlugin.getDefault().getLog();
 
 	private final List<String> command;
 	private final String description;
@@ -31,7 +26,7 @@ public class CommandJob extends Job {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		logInfo("Running command " + command);
+		LogHelper.info("Running command " + command);
 		monitor.beginTask(description, IProgressMonitor.UNKNOWN);
 		ProcessBuilder processBuilder = new ProcessBuilder(command);
 		processBuilder.redirectError(Redirect.INHERIT);
@@ -39,9 +34,9 @@ public class CommandJob extends Job {
 			process = processBuilder.start();
 			return monitorAndAwaitTermination(monitor);
 		} catch (IOException e) {
-			logError("Exception whilst running command " + command, e);
+			LogHelper.error("Exception whilst running command " + command, e);
 		} catch (InterruptedException e) {
-			logError("Interrupted whilst waiting for completion of command " + command, e);
+			LogHelper.error("Interrupted whilst waiting for completion of command " + command, e);
 			Thread.currentThread().interrupt();
 		}
 		return Status.CANCEL_STATUS;
@@ -61,18 +56,10 @@ public class CommandJob extends Job {
 			if (exitValue == 0) {
 				return Status.OK_STATUS;
 			} else {
-				logError("Unexpected exit value " + exitValue + " from command " + command, null);
+				LogHelper.error("Unexpected exit value " + exitValue + " from command " + command, null);
 				return Status.CANCEL_STATUS;
 			}
 		}
-	}
-
-	private void logInfo(String message) {
-		LOGGER.log(new Status(IStatus.INFO, SolargraphPlugin.PLUGIN_ID, message));
-	}
-
-	private void logError(String message, Throwable exception) {
-		LOGGER.log(new Status(IStatus.ERROR, SolargraphPlugin.PLUGIN_ID, message, exception));
 	}
 
 }

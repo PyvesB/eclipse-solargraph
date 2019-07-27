@@ -33,6 +33,7 @@
 * Code outline
 * Code folding
 * Documentation hovers, see the [Solargraph readme](https://github.com/castwide/solargraph#gem-support) for more information
+* Run files as Ruby programs
 * Various other features part of the Language Server Protocol
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
@@ -79,6 +80,7 @@ The following projects are used by this plugin:
 * [LSP4E](https://projects.eclipse.org/projects/technology.lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
 * [VS Code](https://code.visualstudio.com/): TextMate language configuration (MIT License).
 * [TM4E](https://projects.eclipse.org/projects/technology.tm4e): TextMate support in the Eclipse IDE (Eclipse Public License).
+* [Ruby](https://www.ruby-lang.org): launch shortcut logo (Creative Commons License).
 
 # License 
 

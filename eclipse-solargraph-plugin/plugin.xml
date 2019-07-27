@@ -78,4 +78,29 @@
             name="Solargraph">
       </page>
    </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            category="org.eclipse.ui.externaltools"
+            class="io.github.pyvesb.eclipse_solargraph.launch.FileLaunchShortcut"
+            icon="icon/ruby.png"
+            id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
+            label="Ruby program"
+            modes="run">
+          <contextualLaunch>
+              <enablement>
+                  <with variable="selection">
+                      <count value="1" />
+                      <iterate>
+                          <and>
+                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <test property="org.eclipse.debug.ui.matchesPattern" value="*.rb" />
+                          </and>
+                      </iterate>
+                  </with>
+              </enablement>
+          </contextualLaunch>
+      </shortcut>
+      
+   </extension>
 </plugin>

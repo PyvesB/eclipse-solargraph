@@ -15,6 +15,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	@Override
 	public void createFieldEditors() {
 		addField(new FileFieldEditor(Preferences.GEM_PATH, Preferences.GEM_PATH_DESC, true, getFieldEditorParent()));
+		addField(new FileFieldEditor(Preferences.RUBY_PATH, Preferences.RUBY_PATH_DESC, true, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(Preferences.UPDATE_GEM, Preferences.UPDATE_GEM_DESC, getFieldEditorParent()));
 	}
 
