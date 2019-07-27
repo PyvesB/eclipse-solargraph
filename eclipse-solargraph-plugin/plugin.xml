@@ -76,6 +76,9 @@
             class="io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage"
             id="io.github.pyvesb.eclipse_solargraph"
             name="Solargraph">
+         <keywordReference
+               id="io.github.pyvesb.eclipse_solargraph.ruby_keyword">
+         </keywordReference>
       </page>
    </extension>
    <extension
@@ -102,5 +105,12 @@
           </contextualLaunch>
       </shortcut>
       
+   </extension>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="io.github.pyvesb.eclipse_solargraph.ruby_keyword"
+            label="ruby">
+      </keyword>
    </extension>
 </plugin>
