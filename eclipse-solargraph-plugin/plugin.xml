@@ -85,7 +85,7 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             category="org.eclipse.ui.externaltools"
-            class="io.github.pyvesb.eclipse_solargraph.launch.FileLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut"
             icon="icon/ruby.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
             label="Ruby program"
@@ -104,7 +104,48 @@
               </enablement>
           </contextualLaunch>
       </shortcut>
-      
+      <shortcut
+            category="org.eclipse.ui.externaltools"
+            class="io.github.pyvesb.eclipse_solargraph.launch.BundleInstallLaunchShortcut"
+            icon="icon/ruby.png"
+            id="io.github.pyvesb.eclipse_solargraph.launch_gemfile_file"
+            label="Bundle install"
+            modes="run">
+          <contextualLaunch>
+              <enablement>
+                  <with variable="selection">
+                      <count value="1" />
+                      <iterate>
+                          <and>
+                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <test property="org.eclipse.debug.ui.matchesPattern" value="Gemfile$" />
+                          </and>
+                      </iterate>
+                  </with>
+              </enablement>
+          </contextualLaunch>
+      </shortcut>
+      <shortcut
+            category="org.eclipse.ui.externaltools"
+            class="io.github.pyvesb.eclipse_solargraph.launch.GemBuildLaunchShortcut"
+            icon="icon/ruby.png"
+            id="io.github.pyvesb.eclipse_solargraph.launch_gemspec_file"
+            label="Gem build"
+            modes="run">
+          <contextualLaunch>
+              <enablement>
+                  <with variable="selection">
+                      <count value="1" />
+                      <iterate>
+                          <and>
+                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <test property="org.eclipse.debug.ui.matchesPattern" value="*.gemspec" />
+                          </and>
+                      </iterate>
+                  </with>
+              </enablement>
+          </contextualLaunch>
+      </shortcut>
    </extension>
    <extension
          point="org.eclipse.ui.keywords">

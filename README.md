@@ -34,6 +34,7 @@
 * Code folding
 * Documentation hovers, see the [Solargraph readme](https://github.com/castwide/solargraph#gem-support) for more information
 * Run files as Ruby programs
+* Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Various other features part of the Language Server Protocol
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!

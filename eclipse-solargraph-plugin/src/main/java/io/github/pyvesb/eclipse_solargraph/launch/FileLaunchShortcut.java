@@ -1,5 +1,6 @@
 package io.github.pyvesb.eclipse_solargraph.launch;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,14 +22,20 @@ import io.github.pyvesb.eclipse_solargraph.preferences.Preferences;
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
-public class FileLaunchShortcut implements ILaunchShortcut {
+public abstract class FileLaunchShortcut implements ILaunchShortcut {
+
+	private String baseCommand;
+
+	public FileLaunchShortcut(String baseCommand) {
+		this.baseCommand = baseCommand;
+	}
 
 	@Override
 	public void launch(ISelection selection, String mode) {
 		if (selection instanceof StructuredSelection) {
 			Object firstElement = ((StructuredSelection) selection).getFirstElement();
 			if (firstElement instanceof IFile) {
-				launchRubyFile((IFile) firstElement);
+				launchFile((IFile) firstElement);
 			}
 		}
 	}
@@ -37,26 +44,37 @@ public class FileLaunchShortcut implements ILaunchShortcut {
 	public void launch(IEditorPart editor, String mode) {
 		IEditorInput editorInput = editor.getEditorInput();
 		if (editorInput instanceof IFileEditorInput) {
-			launchRubyFile(((IFileEditorInput) editorInput).getFile());
+			launchFile(((IFileEditorInput) editorInput).getFile());
 		}
 	}
 
-	private void launchRubyFile(IFile rubyFile) {
+	private void launchFile(IFile file) {
 		Launch launch = new Launch(null, ILaunchManager.RUN_MODE, null);
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(launch);
-		String rubyPath = SolargraphPlugin.getPreferences().get(Preferences.RUBY_PATH, Preferences.RUBY_PATH_DEFAULT);
-		List<String> command = CommandHelper.getPlatformCommand(rubyPath + " " + rubyFile.getLocation().toOSString());
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		String fileName = rubyFile.getName();
-		Job.create("Running " + fileName, r -> {
+		List<String> command = getFileCommand(file);
+		String commandSummary = baseCommand + file.getName();
+		Job.create("Running " + commandSummary, r -> {
 			try {
-				Process process = processBuilder.start();
-				IProcess runtimeProcess = DebugPlugin.newProcess(launch, process, "ruby " + fileName);
+				Process process = new ProcessBuilder(command).start();
+				IProcess runtimeProcess = DebugPlugin.newProcess(launch, process, commandSummary);
 				launch.addProcess(runtimeProcess);
 			} catch (IOException e) {
-				LogHelper.error("Exception whilst running " + fileName, e);
+				LogHelper.error("Exception whilst running " + command, e);
 			}
 		}).schedule();
+	}
+
+	private List<String> getFileCommand(IFile file) {
+		StringBuilder command = new StringBuilder();
+		if (!SolargraphPlugin.getPreferences().getBoolean(Preferences.SYSTEM_RUBY, Preferences.SYSTEM_RUBY_DEFAULT)) {
+			command.append(SolargraphPlugin.getPreferences().get(Preferences.RUBY_DIR, Preferences.RUBY_DIR_DEFAULT));
+			if (command.length() > 0) {
+				command.append(File.separator);
+			}
+		}
+		command.append(baseCommand);
+		command.append(file.getLocation().toOSString());
+		return CommandHelper.getPlatformCommand(command.toString());
 	}
 
 }
