@@ -50,6 +50,13 @@
       </presentationReconciler>
    </extension>
    <extension
+         point="org.eclipse.ui.genericeditor.icons">
+      <icon
+            icon="icon/ruby-editor.png"
+            contentType="io.github.pyvesb.eclipse_solargraph">
+      </icon>
+   </extension>
+   <extension
          point="org.eclipse.tm4e.languageconfiguration.languageConfigurations">
       <languageConfiguration
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
@@ -86,7 +93,7 @@
       <shortcut
             category="org.eclipse.ui.externaltools"
             class="io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut"
-            icon="icon/ruby.png"
+            icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
             label="Ruby program"
             modes="run">
@@ -107,7 +114,7 @@
       <shortcut
             category="org.eclipse.ui.externaltools"
             class="io.github.pyvesb.eclipse_solargraph.launch.BundleInstallLaunchShortcut"
-            icon="icon/ruby.png"
+            icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemfile_file"
             label="Bundle install"
             modes="run">
@@ -128,7 +135,7 @@
       <shortcut
             category="org.eclipse.ui.externaltools"
             class="io.github.pyvesb.eclipse_solargraph.launch.GemBuildLaunchShortcut"
-            icon="icon/ruby.png"
+            icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemspec_file"
             label="Gem build"
             modes="run">
