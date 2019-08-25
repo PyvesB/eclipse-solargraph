@@ -4,4 +4,6 @@
       The Ruby Solargraph plugin update site.
    </description>
    <feature id="io.github.pyvesb.eclipse_solargraph"/>
+   <!-- Allows Solargraph to properly run on Photon, 2018-09 and 2018-12. Newer Eclipse versions will prefer a more recent LSP4E from the main Eclipse Project update site. -->
+   <repository-reference location="https://download.eclipse.org/lsp4e/releases/0.9.0" enabled="true" />
 </site>
