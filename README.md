@@ -18,9 +18,9 @@
 **Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
 
 <p align="center" style="font-size:5px">
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/screenshot.png?raw=true" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" />
 <br />
-<i><sub>Ruby edition with syntax highlighting and autocomplete. Many other features are also available.</sub></i>
+<i><sub>Ruby edition with syntax highlighting, autocomplete, docs, outline and references search. Many other features are also available.</sub></i>
 </p>
 
 # Features at a glance
