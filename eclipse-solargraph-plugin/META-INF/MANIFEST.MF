@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ruby Solargraph
 Bundle-SymbolicName: io.github.pyvesb.eclipse_solargraph;singleton:=true
-Bundle-Version: 0.2.1
+Bundle-Version: 0.2.2
 Bundle-Activator: io.github.pyvesb.eclipse_solargraph.SolargraphPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
