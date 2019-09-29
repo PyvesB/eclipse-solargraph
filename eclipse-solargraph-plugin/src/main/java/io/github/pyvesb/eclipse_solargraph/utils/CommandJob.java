@@ -28,10 +28,8 @@ public class CommandJob extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		LogHelper.info("Running command " + command);
 		monitor.beginTask(description, IProgressMonitor.UNKNOWN);
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		processBuilder.redirectError(Redirect.INHERIT);
 		try {
-			process = processBuilder.start();
+			process = new ProcessBuilder(command).redirectError(Redirect.INHERIT).start();
 			return monitorAndAwaitTermination(monitor);
 		} catch (IOException e) {
 			LogHelper.error("Exception whilst running command " + command, e);
