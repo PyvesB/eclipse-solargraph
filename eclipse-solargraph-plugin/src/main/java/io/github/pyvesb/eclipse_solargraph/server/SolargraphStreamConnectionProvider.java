@@ -62,8 +62,8 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 		Display display = Display.getDefault();
 		display.asyncExec(() -> {
 			MessageDialog dialog = new MessageDialog(display.getActiveShell(), "Solargraph was not found", null,
-					"Features such as code completion will not be available. "
-							+ "Let Eclipse install the gem locally or specify a full path after running \"gem install solargraph\" in a terminal.",
+					"Key features will not be available. Let Eclipse install the gem locally or specify its path "
+							+ "after running \"gem install solargraph\" in a terminal.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
 			if (dialog.open() == 0) { // First button index, install.
 				installSolargraph();
@@ -88,9 +88,8 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 				} else {
 					Display display = Display.getDefault();
 					display.asyncExec(() -> MessageDialog.openError(display.getActiveShell(),
-							"Solargraph intallation failed",
-							"The Solargraph gem was not installed successfully. Please open the Error Log view for more information. "
-									+ "To manually install it, run \"gem install solargraph\" in a terminal and specify the path in the plugin's preferences page."));
+							"Solargraph intallation failed", "Please open the Error Log view for details. To manually "
+									+ "install it, run \"gem install solargraph\" in a terminal and specify the path in the plugin's preferences."));
 				}
 			}
 		});
