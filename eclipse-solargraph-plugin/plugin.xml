@@ -24,7 +24,7 @@
          <server
             class="io.github.pyvesb.eclipse_solargraph.server.SolargraphStreamConnectionProvider"
             id="io.github.pyvesb.eclipse_solargraph"
-            label="io.github.pyvesb.eclipse_solargraph.Solargraph">
+            label="Solargraph Language Server">
          </server>
          <contentTypeMapping
             contentType="io.github.pyvesb.eclipse_solargraph"
