@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.pyvesb.eclipse_solargraph</groupId>
   <artifactId>eclipse-solargraph</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.2.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
     <module>eclipse-solargraph-feature</module>
@@ -24,7 +24,7 @@
   <repositories>
 		<repository>
 			<id>platform</id>
-			<url>http://download.eclipse.org/releases/2019-03</url>
+			<url>http://download.eclipse.org/releases/2019-09</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>

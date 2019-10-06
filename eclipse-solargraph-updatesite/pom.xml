@@ -5,10 +5,10 @@
   <parent>
     <groupId>io.github.pyvesb.eclipse_solargraph</groupId>
     <artifactId>eclipse-solargraph</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.2.3-SNAPSHOT</version>
   </parent>
   <groupId>io.github.pyvesb.eclipse_solargraph</groupId>
   <artifactId>eclipse-solargraph-updatesite</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.2.3-SNAPSHOT</version>
   <packaging>eclipse-repository</packaging>
 </project>
