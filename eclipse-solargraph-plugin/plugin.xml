@@ -8,7 +8,7 @@
            file-extensions="rb,gemspec"
            file-names="gemfile"
            id="io.github.pyvesb.eclipse_solargraph"
-           name="Ruby file"
+           name="Ruby"
            priority="high">
      </content-type>
    </extension>
