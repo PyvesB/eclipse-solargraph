@@ -7,8 +7,6 @@ import org.osgi.framework.BundleContext;
 
 public class SolargraphPlugin extends AbstractUIPlugin {
 
-	public static final String PLUGIN_ID = "io.github.pyvesb.eclipse_solargraph";
-
 	private static SolargraphPlugin plugin; // Shared plugin instance.
 
 	@Override
@@ -28,7 +26,7 @@ public class SolargraphPlugin extends AbstractUIPlugin {
 	}
 
 	public static IEclipsePreferences getPreferences() {
-		return InstanceScope.INSTANCE.getNode(PLUGIN_ID);
+		return InstanceScope.INSTANCE.getNode(plugin.getBundle().getSymbolicName());
 	}
 
 }
