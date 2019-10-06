@@ -14,6 +14,9 @@
 <a href="https://marketplace.eclipse.org/content/eclipse-solargraph">
 <img src ="https://img.shields.io/eclipse-marketplace/favorites/ruby-solargraph.svg" />
 </a>
+<a href="https://marketplace.eclipse.org/content/eclipse-solargraphs">
+<img src ="https://img.shields.io/eclipse-marketplace/dt/ruby-solargraph.svg" />
+</a>
 
 **Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
 
