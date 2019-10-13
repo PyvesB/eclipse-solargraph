@@ -39,12 +39,12 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 		}
 		if (getCommands().isEmpty() && !HAS_DISPLAYED_NOT_FOUND_WARNING.getAndSet(true)) {
 			displayNotFoundWarning();
-		} else if (!getCommands().isEmpty()
-				&& SolargraphPlugin.getPreferences().getBoolean(Preferences.UPDATE_GEM, Preferences.UPDATE_GEM_DEFAULT)
+		} 
+		super.start();
+		if (SolargraphPlugin.getPreferences().getBoolean(Preferences.UPDATE_GEM, Preferences.UPDATE_GEM_DEFAULT)
 				&& !HAS_UPDATED_SOLARGRAPH.getAndSet(true)) {
 			updateSolargraph();
 		}
-		super.start();
 	}
 
 	@Override
