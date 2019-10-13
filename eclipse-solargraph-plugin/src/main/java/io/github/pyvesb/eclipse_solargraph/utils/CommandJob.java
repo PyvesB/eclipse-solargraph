@@ -3,9 +3,10 @@ package io.github.pyvesb.eclipse_solargraph.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -29,9 +30,17 @@ public class CommandJob extends Job {
 		LogHelper.info("Running command " + command);
 		monitor.beginTask(description, IProgressMonitor.UNKNOWN);
 		try {
-			process = new ProcessBuilder(command).redirectError(Redirect.INHERIT).start();
-			return monitorAndAwaitTermination(monitor);
-		} catch (IOException e) {
+			process = new ProcessBuilder(command).start();
+			monitorOutput(monitor);
+			CompletableFuture<String> error = consumeError();
+			int exitValue = process.waitFor();
+			if (exitValue == 0) {
+				return Status.OK_STATUS;
+			} else {
+				LogHelper.error("Unexpected exit value " + exitValue + " from command " + command + System.lineSeparator()
+						+ "Error details:" + System.lineSeparator() + error.get(), null);
+			}
+		} catch (IOException | ExecutionException e) {
 			LogHelper.error("Exception whilst running command " + command, e);
 		} catch (InterruptedException e) {
 			LogHelper.error("Interrupted whilst waiting for completion of command " + command, e);
@@ -39,7 +48,7 @@ public class CommandJob extends Job {
 		}
 		return Status.CANCEL_STATUS;
 	}
-	
+
 	@Override
 	protected void canceling() {
 		if (process != null) {
@@ -47,17 +56,24 @@ public class CommandJob extends Job {
 		}
 	}
 
-	private IStatus monitorAndAwaitTermination(IProgressMonitor monitor) throws IOException, InterruptedException {
-		try (BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-			CompletableFuture.runAsync(() -> inputReader.lines().forEachOrdered(monitor::subTask));
-			int exitValue = process.waitFor();
-			if (exitValue == 0) {
-				return Status.OK_STATUS;
-			} else {
-				LogHelper.error("Unexpected exit value " + exitValue + " from command " + command, null);
-				return Status.CANCEL_STATUS;
+	private void monitorOutput(IProgressMonitor monitor) {
+		CompletableFuture.runAsync(() -> {
+			try (BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+				inputReader.lines().forEachOrdered(monitor::subTask);
+			} catch (IOException e) {
+				LogHelper.error("Failed to read output from command " + command, e);
 			}
-		}
+		});
+	}
+
+	private CompletableFuture<String> consumeError() {
+		return CompletableFuture.supplyAsync(() -> {
+			try (BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
+				return inputReader.lines().collect(Collectors.joining(System.lineSeparator()));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 }
