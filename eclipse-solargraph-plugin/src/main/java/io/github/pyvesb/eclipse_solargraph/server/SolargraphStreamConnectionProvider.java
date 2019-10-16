@@ -86,6 +86,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 					String solargraphExecutable = CommandHelper.isWindows() ? "solargraph.bat" : "solargraph";
 					String solargraphPath = getPluginStateLocation() + File.separator + solargraphExecutable;
 					GEM_PATH.setValue(solargraphPath);
+					HAS_UPDATED_SOLARGRAPH.set(true);
 				} else {
 					Display display = Display.getDefault();
 					display.asyncExec(() -> MessageDialog.openError(display.getActiveShell(),
