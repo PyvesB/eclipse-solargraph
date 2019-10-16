@@ -16,9 +16,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IFileEditorInput;
 
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
@@ -33,20 +31,13 @@ public abstract class FileLaunchShortcut implements ILaunchShortcut {
 
 	@Override
 	public void launch(ISelection selection, String mode) {
-		if (selection instanceof StructuredSelection) {
-			Object firstElement = ((StructuredSelection) selection).getFirstElement();
-			if (firstElement instanceof IFile) {
-				launchFile((IFile) firstElement);
-			}
-		}
+		StructuredSelection structuredSelection = (StructuredSelection) selection;
+		launchFile((IFile) structuredSelection.getFirstElement());
 	}
 
 	@Override
 	public void launch(IEditorPart editor, String mode) {
-		IEditorInput editorInput = editor.getEditorInput();
-		if (editorInput instanceof IFileEditorInput) {
-			launchFile(((IFileEditorInput) editorInput).getFile());
-		}
+		launchFile(editor.getEditorInput().getAdapter(IFile.class));
 	}
 
 	private void launchFile(IFile file) {
