@@ -1,5 +1,8 @@
 package io.github.pyvesb.eclipse_solargraph.launch;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
+import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.RUBY_DIR;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -17,8 +20,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 
-import io.github.pyvesb.eclipse_solargraph.SolargraphPlugin;
-import io.github.pyvesb.eclipse_solargraph.preferences.Preferences;
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
@@ -66,8 +67,8 @@ public abstract class FileLaunchShortcut implements ILaunchShortcut {
 
 	private List<String> getFileCommand(IFile file) {
 		StringBuilder command = new StringBuilder();
-		if (!SolargraphPlugin.getPreferences().getBoolean(Preferences.SYSTEM_RUBY, Preferences.SYSTEM_RUBY_DEFAULT)) {
-			command.append(SolargraphPlugin.getPreferences().get(Preferences.RUBY_DIR, Preferences.RUBY_DIR_DEFAULT));
+		if (!SYSTEM_RUBY.getValue()) {
+			command.append(RUBY_DIR.getValue());
 			if (command.length() > 0) {
 				command.append(File.separator);
 			}

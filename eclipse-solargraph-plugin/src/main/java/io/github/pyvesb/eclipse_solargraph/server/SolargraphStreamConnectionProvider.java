@@ -1,5 +1,8 @@
 package io.github.pyvesb.eclipse_solargraph.server;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
+import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -7,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
@@ -14,16 +18,14 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.lsp4e.server.ProcessStreamConnectionProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.PreferencesUtil;
+import org.osgi.framework.FrameworkUtil;
 
-import io.github.pyvesb.eclipse_solargraph.SolargraphPlugin;
 import io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage;
-import io.github.pyvesb.eclipse_solargraph.preferences.Preferences;
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.CommandJob;
 
 public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionProvider {
 
-	private static final String PLUGIN_STATE_LOCATION = SolargraphPlugin.getDefault().getStateLocation().toOSString();
 	private static final AtomicBoolean HAS_DISPLAYED_NOT_FOUND_WARNING = new AtomicBoolean();
 	private static final AtomicBoolean HAS_UPDATED_SOLARGRAPH = new AtomicBoolean();
 
@@ -39,10 +41,9 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 		}
 		if (getCommands().isEmpty() && !HAS_DISPLAYED_NOT_FOUND_WARNING.getAndSet(true)) {
 			displayNotFoundWarning();
-		} 
+		}
 		super.start();
-		if (SolargraphPlugin.getPreferences().getBoolean(Preferences.UPDATE_GEM, Preferences.UPDATE_GEM_DEFAULT)
-				&& !HAS_UPDATED_SOLARGRAPH.getAndSet(true)) {
+		if (UPDATE_GEM.getValue() && !HAS_UPDATED_SOLARGRAPH.getAndSet(true)) {
 			updateSolargraph();
 		}
 	}
@@ -54,8 +55,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	}
 
 	private static List<String> getSolargraphCommand() {
-		String solargraphPath = SolargraphPlugin.getPreferences().get(Preferences.GEM_PATH, Preferences.GEM_PATH_DEFAULT);
-		return new File(solargraphPath).exists() ? Arrays.asList(solargraphPath, "stdio") : Arrays.asList();
+		return new File(GEM_PATH.getValue()).exists() ? Arrays.asList(GEM_PATH.getValue(), "stdio") : Arrays.asList();
 	}
 
 	private void displayNotFoundWarning() {
@@ -74,8 +74,9 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	}
 
 	private void installSolargraph() {
+		String pluginStateLocation = getPluginStateLocation();
 		List<String> gemCommand = CommandHelper.getPlatformCommand("gem install -V "
-				+ "-n " + PLUGIN_STATE_LOCATION + " solargraph");
+				+ "-n " + pluginStateLocation + " solargraph");
 		CommandJob installCommandJob = new CommandJob(gemCommand, "Installation in progress");
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
 
@@ -83,8 +84,8 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 			public void done(IJobChangeEvent event) {
 				if (event.getResult() == Status.OK_STATUS) {
 					String solargraphExecutable = CommandHelper.isWindows() ? "solargraph.bat" : "solargraph";
-					String solargraphPath = PLUGIN_STATE_LOCATION + File.separator + solargraphExecutable;
-					SolargraphPlugin.getPreferences().put(Preferences.GEM_PATH, solargraphPath);
+					String solargraphPath = getPluginStateLocation() + File.separator + solargraphExecutable;
+					GEM_PATH.setValue(solargraphPath);
 				} else {
 					Display display = Display.getDefault();
 					display.asyncExec(() -> MessageDialog.openError(display.getActiveShell(),
@@ -98,8 +99,12 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 
 	private void updateSolargraph() {
 		List<String> gemCommand = CommandHelper.getPlatformCommand("gem update -V "
-				+ "-n " + PLUGIN_STATE_LOCATION + " solargraph");
+				+ "-n " + getPluginStateLocation() + " solargraph");
 		new CommandJob(gemCommand, "Update in progress").schedule();
+	}
+
+	private String getPluginStateLocation() {
+		return Platform.getStateLocation(FrameworkUtil.getBundle(this.getClass())).toOSString();
 	}
 
 }

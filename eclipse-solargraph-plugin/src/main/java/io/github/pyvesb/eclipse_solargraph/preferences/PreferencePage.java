@@ -1,5 +1,11 @@
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
+import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
+import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.RUBY_DIR;
+
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
@@ -9,8 +15,9 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-
-import io.github.pyvesb.eclipse_solargraph.SolargraphPlugin;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -22,24 +29,21 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	@Override
 	public void createFieldEditors() {
-		addField(new FileFieldEditor(Preferences.GEM_PATH, Preferences.GEM_PATH_DESC, true, getFieldEditorParent()));
-		addField(new BooleanFieldEditor(Preferences.UPDATE_GEM, Preferences.UPDATE_GEM_DESC, getFieldEditorParent()));
-		systemRubyFieldEditor = new BooleanFieldEditor(Preferences.SYSTEM_RUBY, Preferences.SYSTEM_RUBY_DESC,
-				getFieldEditorParent());
+		addField(new FileFieldEditor(GEM_PATH.getKey(), GEM_PATH.getDesc(), true, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(UPDATE_GEM.getKey(), UPDATE_GEM.getDesc(), getFieldEditorParent()));
+		systemRubyFieldEditor = new BooleanFieldEditor(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDesc(), getFieldEditorParent());
 		addField(systemRubyFieldEditor);
 		rubyDirFieldEditorParent = getFieldEditorParent();
 		GridDataFactory.fillDefaults().indent(30, 0).applyTo(rubyDirFieldEditorParent);
-		rubyDirFieldEditor = new DirectoryFieldEditor(Preferences.RUBY_DIR, Preferences.RUBY_DIR_DESC,
-				rubyDirFieldEditorParent);
-		boolean systemRuby = SolargraphPlugin.getPreferences().getBoolean(Preferences.SYSTEM_RUBY,
-				Preferences.SYSTEM_RUBY_DEFAULT);
-		rubyDirFieldEditor.setEnabled(!systemRuby, rubyDirFieldEditorParent);
+		rubyDirFieldEditor = new DirectoryFieldEditor(RUBY_DIR.getKey(), RUBY_DIR.getDesc(), rubyDirFieldEditorParent);
+		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getValue(), rubyDirFieldEditorParent);
 		addField(rubyDirFieldEditor);
 	}
 
 	@Override
 	public void init(IWorkbench workbench) {
-		setPreferenceStore(SolargraphPlugin.getDefault().getPreferenceStore());
+		Bundle bundle = FrameworkUtil.getBundle(this.getClass());
+		setPreferenceStore(new ScopedPreferenceStore(InstanceScope.INSTANCE, bundle.getSymbolicName()));
 		setDescription("Modify settings of the Ruby Solargraph plugin.");
 	}
 
@@ -56,7 +60,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	protected void performDefaults() {
 		super.performDefaults();
 		// PropertyChangeEvents aren't sent when applying defaults.
-		rubyDirFieldEditor.setEnabled(!Preferences.SYSTEM_RUBY_DEFAULT, rubyDirFieldEditorParent);
+		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getDef(), rubyDirFieldEditorParent);
 	}
 
 }
