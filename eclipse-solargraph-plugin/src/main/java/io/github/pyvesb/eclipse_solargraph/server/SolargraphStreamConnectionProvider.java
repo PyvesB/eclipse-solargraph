@@ -101,7 +101,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	private void updateSolargraph() {
 		List<String> gemCommand = CommandHelper.getPlatformCommand("gem update -V "
 				+ "-n " + getPluginStateLocation() + " solargraph");
-		new CommandJob(gemCommand, "Update in progress").schedule();
+		new CommandJob(gemCommand, "Update in progress").schedule(30000L);
 	}
 
 	private String getPluginStateLocation() {
