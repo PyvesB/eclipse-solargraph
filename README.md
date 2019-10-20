@@ -28,14 +28,13 @@
 
 # Features at a glance
 
-* Rich syntax highlighting
+* Rich syntax highlighting and code folding
 * Code completion
+* Documentation hovers
 * Rename refactoring
 * Find references
-* Jump to declaration
+* Jump to declarations
 * Code outline
-* Code folding
-* Documentation hovers, see the [Solargraph readme](https://github.com/castwide/solargraph#gem-support) for more information
 * Run files as Ruby programs
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Various other features part of the Language Server Protocol
@@ -53,6 +52,12 @@ You can download and install the plugin via the [Eclipse Marketplace](https://ma
 </p>
 
 Alternatively, head to the [update site](https://pyvesb.github.io/eclipse-solargraph/) and follow the instructions listed there.
+
+#### :sparkles: Tips and tricks
+
+To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
+
+You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
 
 #### :wrench: Setting your own working copy of the project
 
