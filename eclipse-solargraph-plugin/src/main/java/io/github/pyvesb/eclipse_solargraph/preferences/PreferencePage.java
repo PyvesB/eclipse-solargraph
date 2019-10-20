@@ -56,11 +56,4 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		super.propertyChange(event);
 	}
 
-	@Override
-	protected void performDefaults() {
-		super.performDefaults();
-		// PropertyChangeEvents aren't sent when applying defaults.
-		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getDef(), rubyDirFieldEditorParent);
-	}
-
 }
