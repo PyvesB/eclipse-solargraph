@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
-import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -48,8 +47,7 @@ public abstract class FileLaunchShortcut implements ILaunchShortcut {
 		Job.create("Running " + commandSummary, r -> {
 			try {
 				Process process = new ProcessBuilder(command).start();
-				IProcess runtimeProcess = DebugPlugin.newProcess(launch, process, commandSummary);
-				launch.addProcess(runtimeProcess);
+				DebugPlugin.newProcess(launch, process, commandSummary);
 			} catch (IOException e) {
 				LogHelper.error("Exception whilst running " + command, e);
 			}
