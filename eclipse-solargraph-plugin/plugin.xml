@@ -88,11 +88,34 @@
          </keywordReference>
       </page>
    </extension>
+    <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+           name="Ruby script"
+           delegate="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+           modes="run"
+           id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
+            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
+            type="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTypeImage"
+            configTypeID="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            icon="icon/ruby-launch.png">
+      </launchConfigurationTypeImage>
+   </extension>
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            category="org.eclipse.ui.externaltools"
-            class="io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
             label="Ruby program"
