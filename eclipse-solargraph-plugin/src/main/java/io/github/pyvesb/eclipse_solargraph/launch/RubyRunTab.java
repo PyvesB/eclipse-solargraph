@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
- *   Alexander Kurtakov (Red Hat Inc.) - initial implementation
+ *  Alexander Kurtakov (Red Hat Inc.) - Initial implementation
+ *  Pierre-Yves B.  (pyvesdev@gmail.com) - Various improvements
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch;
 

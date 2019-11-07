@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+<!--
+    Copyright (c) 2019 Pierre-Yves B. and others.
+   
+    This program and the accompanying materials are made
+    available under the terms of the Eclipse Public License 2.0
+    which is available at https://www.eclipse.org/legal/epl-2.0/
+   
+    SPDX-License-Identifier: EPL-2.0
+   
+    Contributors:
+     Pierre-Yves B.  (pyvesdev@gmail.com) - Initial implementation
+     Alexander Kurtakov  (Red Hat Inc.) - Launch configuration
+ -->
    <extension 
          point="org.eclipse.core.contenttype.contentTypes">
      <content-type
