@@ -68,9 +68,8 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 
 	private void installSolargraph() {
 		String pluginStateLocation = getPluginStateLocation();
-		List<String> gemCommand = CommandHelper.getPlatformCommand("gem install -V "
-				+ "-n " + pluginStateLocation + " solargraph");
-		CommandJob installCommandJob = new CommandJob(gemCommand, "Installation in progress");
+		String[] command = CommandHelper.getPlatformCommand("gem install -V " + "-n " + pluginStateLocation + " solargraph");
+		CommandJob installCommandJob = new CommandJob(command, "Installation in progress");
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
 
 			@Override
@@ -92,9 +91,9 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	}
 
 	private void updateSolargraph() {
-		List<String> gemCommand = CommandHelper.getPlatformCommand("gem update -V "
-				+ "-n " + getPluginStateLocation() + " solargraph");
-		new CommandJob(gemCommand, "Update in progress").schedule(30000L);
+		String[] command = CommandHelper
+				.getPlatformCommand("gem update -V " + "-n " + getPluginStateLocation() + " solargraph");
+		new CommandJob(command, "Update in progress").schedule(30000L);
 	}
 
 	private String getPluginStateLocation() {

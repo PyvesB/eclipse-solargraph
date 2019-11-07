@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
+
 public class RubyRunTab extends AbstractLaunchConfigurationTab {
 
 	private Text programPathText;
@@ -39,12 +41,12 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 	public void createControl(Composite parent) {
 		Composite resComposite = new Composite(parent, SWT.NONE);
 		resComposite.setLayout(new GridLayout(2, false));
-		new Label(resComposite, SWT.NONE).setText("Ruby Script");
+		new Label(resComposite, SWT.NONE).setText("Ruby script");
 		this.programPathText = new Text(resComposite, SWT.BORDER);
 		this.programPathText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
 		ControlDecoration decoration = new ControlDecoration(programPathText, SWT.TOP | SWT.LEFT);
 		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
-		        FieldDecorationRegistry.DEC_ERROR);
+				FieldDecorationRegistry.DEC_ERROR);
 		decoration.setImage(fieldDecoration.getImage());
 		this.programPathText.addModifyListener(event -> {
 			setDirty(true);
@@ -54,7 +56,7 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 				setErrorMessage(errorMessage);
 				decoration.setDescriptionText(errorMessage);
 				decoration.show();
-			} if (!file.canRead()) {
+			} else if (!file.canRead()) {
 				String errorMessage = "Non readable file";
 				setErrorMessage(errorMessage);
 				decoration.setDescriptionText(errorMessage);
@@ -90,18 +92,17 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			String defaultSelectedFile = "";
-			this.programPathText.setText(configuration.getAttribute(RubyRunDelegate.PROGRAM, defaultSelectedFile)); //$NON-NLS-1$
-			this.argumentsText.setText(configuration.getAttribute(RubyRunDelegate.ARGUMENTS, "")); //$NON-NLS-1$
-			this.workingDirectoryText.setText(configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, "")); //$NON-NLS-1$
+			this.programPathText.setText(configuration.getAttribute(RubyRunDelegate.SCRIPT, ""));
+			this.argumentsText.setText(configuration.getAttribute(RubyRunDelegate.ARGUMENTS, ""));
+			this.workingDirectoryText.setText(configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""));
 		} catch (CoreException e) {
-			e.printStackTrace();
+			LogHelper.error("Exception whilst initializing launch configuration tab", e);
 		}
 	}
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(RubyRunDelegate.PROGRAM, this.programPathText.getText());
+		configuration.setAttribute(RubyRunDelegate.SCRIPT, this.programPathText.getText());
 		configuration.setAttribute(RubyRunDelegate.ARGUMENTS, this.argumentsText.getText());
 		configuration.setAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, this.workingDirectoryText.getText());
 	}

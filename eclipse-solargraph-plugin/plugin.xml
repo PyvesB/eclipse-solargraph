@@ -91,7 +91,7 @@
     <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-           name="Ruby script"
+           name="Ruby Script"
            delegate="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
            modes="run"
            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
@@ -118,7 +118,7 @@
             class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
-            label="Ruby program"
+            label="Ruby script"
             modes="run">
           <contextualLaunch>
               <enablement>
@@ -126,7 +126,7 @@
                       <count value="1" />
                       <iterate>
                           <and>
-                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <adapt type="org.eclipse.core.resources.IResource" />
                               <test property="org.eclipse.debug.ui.matchesPattern" value="*.rb" />
                           </and>
                       </iterate>
@@ -136,7 +136,7 @@
       </shortcut>
       <shortcut
             category="org.eclipse.ui.externaltools"
-            class="io.github.pyvesb.eclipse_solargraph.launch.BundleInstallLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemfile_file"
             label="Bundle install"
@@ -147,7 +147,7 @@
                       <count value="1" />
                       <iterate>
                           <and>
-                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <adapt type="org.eclipse.core.resources.IResource" />
                               <test property="org.eclipse.debug.ui.matchesPattern" value="Gemfile$" />
                           </and>
                       </iterate>
@@ -157,7 +157,7 @@
       </shortcut>
       <shortcut
             category="org.eclipse.ui.externaltools"
-            class="io.github.pyvesb.eclipse_solargraph.launch.GemBuildLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemspec_file"
             label="Gem build"
@@ -168,7 +168,7 @@
                       <count value="1" />
                       <iterate>
                           <and>
-                              <adapt type="org.eclipse.core.resources.IFile" />
+                              <adapt type="org.eclipse.core.resources.IResource" />
                               <test property="org.eclipse.debug.ui.matchesPattern" value="*.gemspec" />
                           </and>
                       </iterate>
