@@ -91,16 +91,19 @@
     <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-           name="Ruby Script"
-           delegate="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
-           modes="run"
-           id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
+            delegate="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            delegateDescription="Launches files as a Ruby scripts."
+            delegateName="Ruby Launcher"
+            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            modes="run"
+            name="Ruby Script">
       </launchConfigurationType>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
+            description="Launches files as a Ruby scripts."
             id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
             type="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
       </launchConfigurationTabGroup>
@@ -116,6 +119,7 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            description="Launches your file as a Ruby script."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
             label="Ruby script"
@@ -135,8 +139,8 @@
           </contextualLaunch>
       </shortcut>
       <shortcut
-            category="org.eclipse.ui.externaltools"
             class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
+            description="Installs the dependencies from your Gemfile."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemfile_file"
             label="Bundle install"
@@ -156,8 +160,8 @@
           </contextualLaunch>
       </shortcut>
       <shortcut
-            category="org.eclipse.ui.externaltools"
             class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
+            description="Builds your gem specification."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemspec_file"
             label="Gem build"
