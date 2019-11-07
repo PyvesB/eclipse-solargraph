@@ -13,8 +13,11 @@
 package io.github.pyvesb.eclipse_solargraph.launch;
 
 import java.io.File;
+import java.net.URL;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -22,12 +25,16 @@ import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
@@ -112,4 +119,10 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 		return "Main";
 	}
 
+	@Override
+	public Image getImage() {
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		URL url = FileLocator.find(bundle, new Path("/icon/ruby-editor.png"));
+		return ImageDescriptor.createFromURL(url).createImage();
+	}
 }
