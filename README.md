@@ -35,7 +35,7 @@
 * Find references
 * Jump to declarations
 * Code outline
-* Run files as Ruby programs
+* Run files as Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Various other features part of the Language Server Protocol
 
