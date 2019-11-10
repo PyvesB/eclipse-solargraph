@@ -66,6 +66,7 @@ You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .
 * In Eclipse, go to `File` -> `Import...` -> `General` -> `Existing Projects into Workspace`.
 * In the `Select root directory` field, indicate the location where you checked out the eclipse-solargraph repository.
 * Ensure `Search for nested projects` is enabled, select all projects in the `Projects` field and click `Finish`.
+* Open `eclipse-solargraph-target-platform.target` and click `Set as Active Target Platform`.
 * You're ready to go! You can now either launch an instance of Eclipse running the plugin by right-clicking on the plugin project and selecting `Run As` -> `Eclipse Application`, or you can export a plugin archive file by selecting `Export` -> `Deployable plug-ins and fragments`.
 
 # Contributing
