@@ -1,6 +1,8 @@
 name: Publish new plugin version
 
-on: release
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -19,8 +21,9 @@ jobs:
       run: |
         git checkout gh-pages
         cp -r eclipse-solargraph-updatesite/target/repository/. .
-        git config --local user.email "PyvesDev@gmail.com"
-        git config --local user.name "Pierre-Yves B."
+        git config user.name $(jq .pusher.username $GITHUB_PAYLOAD)
+        git config user.email $(jq .pusher.email $GITHUB_PAYLOAD)
         git add -A
         git commit -m "Added version $(curl --silent https://api.github.com/repos/PyvesB/eclipse-solargraph/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/') to the update site"
-        git push https://PyvesB:${{ secrets.GITHUB_TOKEN }}@github.com/PyvesB/eclipse-solargraph.git
+        git remote add pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/PyvesB/eclipse-solargraph.git
+        git push pages gh-pages -f
