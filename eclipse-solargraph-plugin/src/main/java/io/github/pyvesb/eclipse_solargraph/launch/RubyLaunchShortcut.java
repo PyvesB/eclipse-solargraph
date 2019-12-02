@@ -10,47 +10,27 @@
  * Contributors:
  *  Alexander Kurtakov  (Red Hat Inc.) - Initial implementation
  *  Pierre-Yves B.  (pyvesdev@gmail.com) - Various improvements
+ *  Pierre-Yves B.  (pyvesdev@gmail.com) - Debugger support
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch;
 
-import java.io.File;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 
-import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
-public class RubyRunDelegate extends LaunchConfigurationDelegate implements ResourceLaunchShortcut {
+public class RubyLaunchShortcut implements IResourceLaunchShortcut {
 
-	static final String SCRIPT = "SCRIPT";
-	static final String ARGUMENTS = "ARGUMENTS";
-	
-	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
-		String program = configuration.getAttribute(SCRIPT, "");
-		String arguments = configuration.getAttribute(ARGUMENTS, "");
-		String workingDirectory = configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, "");
-		String command = "ruby " + program + " " + arguments;
-		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
-		Job.create("Running " + command, r -> {
-			Process process = DebugPlugin.exec(absolutePlatformCommand, new File(workingDirectory));
-			DebugPlugin.newProcess(launch, process, command);
-		}).schedule();
-	}
+	public static final String SCRIPT = "SCRIPT";
+	public static final String ARGUMENTS = "ARGUMENTS";
 
 	@Override
 	public void launchResource(IResource resource, String mode) {
@@ -67,14 +47,14 @@ public class RubyRunDelegate extends LaunchConfigurationDelegate implements Reso
 
 	private ILaunchConfiguration getLaunchConfiguration(IResource resource) throws CoreException {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
-		ILaunchConfigurationType configType = launchManager.getLaunchConfigurationType(getClass().getCanonicalName());
-		
+		ILaunchConfigurationType configType = launchManager.getLaunchConfigurationType(getClass().getPackage().getName());
+
 		for (ILaunchConfiguration launchConfig : launchManager.getLaunchConfigurations(configType)) {
 			if (launchConfig.getName().equals(resource.getName())) {
 				return launchConfig;
 			}
 		}
-		
+
 		String configName = launchManager.generateLaunchConfigurationName(resource.getName());
 		ILaunchConfigurationWorkingCopy wc = configType.newInstance(null, configName);
 		wc.setAttribute(SCRIPT, resource.getLocation().toOSString());

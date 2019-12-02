@@ -6,6 +6,7 @@ Bundle-Version: 0.3.1
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.ui,
  org.eclipse.lsp4e,
+  org.eclipse.lsp4e.debug,
  org.eclipse.tm4e.languageconfiguration,
  org.eclipse.tm4e.ui,
  org.eclipse.ui,
@@ -15,6 +16,8 @@ Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: io.github.pyvesb.eclipse_solargraph
 Bundle-ClassPath: .
 Export-Package: io.github.pyvesb.eclipse_solargraph.launch,
+ io.github.pyvesb.eclipse_solargraph.launch.debug,
+ io.github.pyvesb.eclipse_solargraph.launch.run,
  io.github.pyvesb.eclipse_solargraph.preferences,
  io.github.pyvesb.eclipse_solargraph.server,
  io.github.pyvesb.eclipse_solargraph.utils

@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 
-public interface ResourceLaunchShortcut extends ILaunchShortcut {
+public interface IResourceLaunchShortcut extends ILaunchShortcut {
 
 	@Override
 	public default void launch(ISelection selection, String mode) {

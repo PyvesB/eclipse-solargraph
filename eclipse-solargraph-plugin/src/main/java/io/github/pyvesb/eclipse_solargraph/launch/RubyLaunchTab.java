@@ -39,7 +39,7 @@ import org.osgi.framework.FrameworkUtil;
 
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
-public class RubyRunTab extends AbstractLaunchConfigurationTab {
+public class RubyLaunchTab extends AbstractLaunchConfigurationTab {
 
 	private Text programPathText;
 	private Text argumentsText;
@@ -100,8 +100,8 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			this.programPathText.setText(configuration.getAttribute(RubyRunDelegate.SCRIPT, ""));
-			this.argumentsText.setText(configuration.getAttribute(RubyRunDelegate.ARGUMENTS, ""));
+			this.programPathText.setText(configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""));
+			this.argumentsText.setText(configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""));
 			this.workingDirectoryText.setText(configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""));
 		} catch (CoreException e) {
 			LogHelper.error("Exception whilst initializing launch configuration tab", e);
@@ -110,8 +110,8 @@ public class RubyRunTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(RubyRunDelegate.SCRIPT, this.programPathText.getText());
-		configuration.setAttribute(RubyRunDelegate.ARGUMENTS, this.argumentsText.getText());
+		configuration.setAttribute(RubyLaunchShortcut.SCRIPT, this.programPathText.getText());
+		configuration.setAttribute(RubyLaunchShortcut.ARGUMENTS, this.argumentsText.getText());
 		configuration.setAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, this.workingDirectoryText.getText());
 	}
 

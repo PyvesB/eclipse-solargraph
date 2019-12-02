@@ -10,7 +10,7 @@
  * Contributors:
  *  Pierre-Yves B.  (pyvesdev@gmail.com) - Initial implementation
  *******************************************************************************/
-package io.github.pyvesb.eclipse_solargraph.launch;
+package io.github.pyvesb.eclipse_solargraph.launch.run;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.jobs.Job;
@@ -18,9 +18,10 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 
+import io.github.pyvesb.eclipse_solargraph.launch.IResourceLaunchShortcut;
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 
-public class BundleGemLaunchShortcut implements ResourceLaunchShortcut {
+public class BundleGemRunShortcut implements IResourceLaunchShortcut {
 
 	@Override
 	public void launchResource(IResource resource, String mode) {

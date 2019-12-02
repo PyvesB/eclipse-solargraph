@@ -15,7 +15,8 @@ package io.github.pyvesb.eclipse_solargraph.preferences;
 public enum StringPreferences implements Preference<String> {
 
 	GEM_PATH("GemPath", "Solargraph executable:", ""),
-	RUBY_DIR("RubyDir", "Ruby bin directory:", "");
+	RUBY_DIR("RubyDir", "Ruby bin directory:", ""),
+	READAPT_PATH("ReadaptPath", "Readapt executable:", "");
 
 	private final String key;
 	private final String desc;

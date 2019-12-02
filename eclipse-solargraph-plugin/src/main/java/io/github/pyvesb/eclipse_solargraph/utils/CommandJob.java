@@ -31,8 +31,8 @@ public class CommandJob extends Job {
 	private final String description;
 	private volatile Process process;
 
-	public CommandJob(String[] command, String description) {
-		super("Solargraph");
+	public CommandJob(String gemName, String[] command, String description) {
+		super(gemName);
 		this.command = command;
 		this.description = description;
 	}

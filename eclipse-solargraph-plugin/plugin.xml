@@ -104,39 +104,38 @@
     <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
-            delegateDescription="Launches files as a Ruby scripts."
+            delegateDescription="Launches files as Ruby scripts."
             delegateName="Ruby Launcher"
-            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
-            modes="run"
+            id="io.github.pyvesb.eclipse_solargraph.launch"
+            modes="run,debug"
             name="Ruby Script">
       </launchConfigurationType>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
-            description="Launches files as a Ruby scripts."
-            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTabGroup"
-            type="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate">
+            class="io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchTabGroup"
+            description="Launches files as Ruby scripts."
+            id="io.github.pyvesb.eclipse_solargraph.launch_tab"
+            type="io.github.pyvesb.eclipse_solargraph.launch">
       </launchConfigurationTabGroup>
    </extension>
    <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
-            id="io.github.pyvesb.eclipse_solargraph.launch.RubyRunTypeImage"
-            configTypeID="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            id="io.github.pyvesb.eclipse_solargraph.launch_image"
+            configTypeID="io.github.pyvesb.eclipse_solargraph.launch"
             icon="icon/ruby-launch.png">
       </launchConfigurationTypeImage>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="io.github.pyvesb.eclipse_solargraph.launch.RubyRunDelegate"
+            class="io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut"
             description="Launches your file as a Ruby script."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_ruby_file"
             label="Ruby script"
-            modes="run">
+            modes="run,debug">
           <contextualLaunch>
               <enablement>
                   <with variable="selection">
@@ -152,7 +151,7 @@
           </contextualLaunch>
       </shortcut>
       <shortcut
-            class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.run.BundleGemRunShortcut"
             description="Installs the dependencies from your Gemfile."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemfile_file"
@@ -173,7 +172,7 @@
           </contextualLaunch>
       </shortcut>
       <shortcut
-            class="io.github.pyvesb.eclipse_solargraph.launch.BundleGemLaunchShortcut"
+            class="io.github.pyvesb.eclipse_solargraph.launch.run.BundleGemRunShortcut"
             description="Builds your gem specification."
             icon="icon/ruby-launch.png"
             id="io.github.pyvesb.eclipse_solargraph.launch_gemspec_file"
@@ -200,5 +199,24 @@
             id="io.github.pyvesb.eclipse_solargraph.ruby_keyword"
             label="ruby">
       </keyword>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchDelegates">
+      <launchDelegate
+            delegate="io.github.pyvesb.eclipse_solargraph.launch.run.RubyRunDelegate"
+            delegateDescription="Runs files as Ruby scripts."
+            id="io.github.pyvesb.eclipse_solargraph.run_ruby_file"
+            modes="run"
+            type="io.github.pyvesb.eclipse_solargraph.launch">
+      </launchDelegate>
+      <launchDelegate
+            delegate="io.github.pyvesb.eclipse_solargraph.launch.debug.ReadaptDebugDelegate"
+            delegateDescription="Debugs files as Ruby scripts."
+            id="io.github.pyvesb.eclipse_solargraph.debug_ruby_file"
+            modes="debug"
+            sourceLocatorId="org.eclipse.lsp4e.debug.sourceLocator"
+            sourcePathComputerId="org.eclipse.lsp4e.debug.sourcePathComputer"
+            type="io.github.pyvesb.eclipse_solargraph.launch">
+      </launchDelegate>
    </extension>
 </plugin>
