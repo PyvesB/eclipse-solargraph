@@ -16,12 +16,12 @@ package io.github.pyvesb.eclipse_solargraph.launch;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 
@@ -36,7 +36,7 @@ public class RubyLaunchShortcut implements IResourceLaunchShortcut {
 	public void launchResource(IResource resource, String mode) {
 		try {
 			ILaunchConfiguration launchConfig = getLaunchConfiguration(resource);
-			launchConfig.launch(mode, new NullProgressMonitor());
+			DebugUITools.launch(launchConfig, mode);
 		} catch (CoreException e) {
 			LogHelper.error("Exception whilst launching " + resource.getName(), e);
 			Display display = Display.getDefault();
