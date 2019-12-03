@@ -49,15 +49,16 @@ public class RubyLaunchShortcut implements IResourceLaunchShortcut {
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType configType = launchManager.getLaunchConfigurationType(getClass().getPackage().getName());
 
+		String scriptLocation = resource.getLocation().toOSString();
 		for (ILaunchConfiguration launchConfig : launchManager.getLaunchConfigurations(configType)) {
-			if (launchConfig.getName().equals(resource.getName())) {
+			if (launchConfig.getAttribute(SCRIPT, "").equals(scriptLocation)) {
 				return launchConfig;
 			}
 		}
 
 		String configName = launchManager.generateLaunchConfigurationName(resource.getName());
 		ILaunchConfigurationWorkingCopy wc = configType.newInstance(null, configName);
-		wc.setAttribute(SCRIPT, resource.getLocation().toOSString());
+		wc.setAttribute(SCRIPT, scriptLocation);
 		wc.setAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, resource.getProject().getLocation().toOSString());
 		return wc.doSave();
 	}
