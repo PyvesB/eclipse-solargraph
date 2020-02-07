@@ -28,7 +28,7 @@ public class GemHelper {
 
 	private static String buildGemCmd(String cmd, String gem) {
 		return String.format(
-			"gem %s -V -n \"%s\" \"%s\"",
+			"gem %s -V -n \"%s\" %s",
 			cmd, getPluginStateLocation(), gem.toLowerCase()
 		);
 	}
