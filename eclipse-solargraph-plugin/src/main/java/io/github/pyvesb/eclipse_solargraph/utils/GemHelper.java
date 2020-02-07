@@ -26,7 +26,7 @@ import io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences;
 
 public class GemHelper {
 
-	private static String buildPlatformCmd(String cmd, String gem) {
+	private static String buildGemCmd(String cmd, String gem) {
 		return String.format(
 			"gem %s -V -n \"%s\" \"%s\"",
 			cmd, getPluginStateLocation(), gem.toLowerCase()
@@ -34,7 +34,7 @@ public class GemHelper {
 	}
 	
 	public static void install(String gem, StringPreferences pathPreference) {
-		String[] command = CommandHelper.getPlatformCommand(buildPlatformCmd("install", gem));
+		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("install", gem));
 		CommandJob installCommandJob = new CommandJob(gem, command, "Installation in progress");
 
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
@@ -57,7 +57,7 @@ public class GemHelper {
 	}
 
 	public static void scheduleUpdate(String gem, long delay) {
-		String[] command = CommandHelper.getPlatformCommand(buildPlatformCmd("update", gem));
+		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("update", gem));
 		new CommandJob(gem, command, "Update in progress").schedule(delay);
 	}
 
