@@ -20,10 +20,12 @@
 
 **Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
 
-<p align="center" style="font-size:5px">
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" />
+<p align="center" style="font-size:5px;">
 <br />
-<i><sub>Ruby edition with syntax highlighting, autocomplete, docs, outline and references search. Many other features are also available.</sub></i>
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="430" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="430" />
+<br />
+<i><sub>Left: Ruby edition with syntax highlighting, autocomplete, docs, outline, references search and many other features! Right: debugging session!</sub></i>
 </p>
 
 # Features at a glance
@@ -38,6 +40,7 @@
 * Run files as Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Various other features part of the Language Server Protocol
+* Experimental debugger
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
 
@@ -87,6 +90,7 @@ Find the project useful, fun or interesting? **Star** the repository by clicking
 
 The following projects are used by this plugin:
 * [Solargraph](http://solargraph.org/) by [castwide](https://github.com/castwide): underlying language server (MIT License) and adapted marketplace logo (CC BY-SA License).
+* [Readapt](https://github.com/castwide/readapt) by [castwide](https://github.com/castwide): debugger (MIT License).
 * [LSP4E](https://projects.eclipse.org/projects/technology.lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
 * [VS Code](https://code.visualstudio.com/): TextMate language configuration (MIT License).
 * [TM4E](https://projects.eclipse.org/projects/technology.tm4e): TextMate support in the Eclipse IDE (Eclipse Public License).
