@@ -26,15 +26,15 @@ import io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences;
 
 public class GemHelper {
 
-	private static String buildGemCmd(String cmd, String gem) {
+	private static String buildGemCmd(String cmd, String lowerCaseGem) {
 		return String.format(
-			"gem %s -V -n \"%s\" %s",
-			cmd, getPluginStateLocation(), gem.toLowerCase()
-		);
+				"gem %s -V -n \"%s\" %s",
+				cmd, getPluginStateLocation(), lowerCaseGem);
 	}
-	
+
 	public static void install(String gem, StringPreferences pathPreference) {
-		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("install", gem));
+		String lowerCaseGem = gem.toLowerCase();
+		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("install", lowerCaseGem));
 		CommandJob installCommandJob = new CommandJob(gem, command, "Installation in progress");
 
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
@@ -43,7 +43,7 @@ public class GemHelper {
 			public void done(IJobChangeEvent event) {
 				if (event.getResult() == Status.OK_STATUS) {
 					String extension = CommandHelper.isWindows() ? ".bat" : "";
-					String gemPath = getPluginStateLocation() + File.separator + gem + extension;
+					String gemPath = getPluginStateLocation() + File.separator + lowerCaseGem + extension;
 					pathPreference.setValue(gemPath);
 				} else {
 					Display display = Display.getDefault();
