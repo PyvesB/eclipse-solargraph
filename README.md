@@ -8,13 +8,13 @@
 <a href="https://github.com/PyvesB/eclipse-solargraph/stargazers">
 <img src ="https://img.shields.io/github/stars/PyvesB/eclipse-solargraph.svg" />
 </a>
-<a href="https://marketplace.eclipse.org/content/eclipse-solargraph">
+<a href="https://marketplace.eclipse.org/content/ruby-solargraph">
 <img src ="https://img.shields.io/eclipse-marketplace/v/ruby-solargraph.svg" />
 </a>
-<a href="https://marketplace.eclipse.org/content/eclipse-solargraph">
+<a href="https://marketplace.eclipse.org/content/ruby-solargraph">
 <img src ="https://img.shields.io/eclipse-marketplace/favorites/ruby-solargraph.svg" />
 </a>
-<a href="https://marketplace.eclipse.org/content/eclipse-solargraphs">
+<a href="https://marketplace.eclipse.org/content/ruby-solargraph">
 <img src ="https://img.shields.io/eclipse-marketplace/dt/ruby-solargraph.svg" />
 </a>
 
