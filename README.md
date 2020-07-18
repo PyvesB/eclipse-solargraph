@@ -22,8 +22,8 @@
 
 <p align="center" style="font-size:5px;">
 <br />
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="430" />
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="430" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="49%" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="49%" />
 <br />
 <i><sub>Left: Ruby edition with syntax highlighting, autocomplete, docs, outline, references search and many other features! Right: debugging session!</sub></i>
 </p>
