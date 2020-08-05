@@ -24,7 +24,7 @@ import org.eclipse.ui.IEditorPart;
 public interface IResourceLaunchShortcut extends ILaunchShortcut {
 
 	@Override
-	public default void launch(ISelection selection, String mode) {
+	default void launch(ISelection selection, String mode) {
 		if (selection instanceof IStructuredSelection) {
 			Object element = ((IStructuredSelection) selection).getFirstElement();
 			IResource resource = null;
@@ -45,10 +45,10 @@ public interface IResourceLaunchShortcut extends ILaunchShortcut {
 	}
 
 	@Override
-	public default void launch(IEditorPart editor, String mode) {
+	default void launch(IEditorPart editor, String mode) {
 		launchResource(editor.getEditorInput().getAdapter(IResource.class), mode);
 	}
 
-	public abstract void launchResource(IResource resource, String mode);
+	void launchResource(IResource resource, String mode);
 
 }

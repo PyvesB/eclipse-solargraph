@@ -18,7 +18,7 @@ import org.osgi.framework.FrameworkUtil;
 
 public interface Preference<T> {
 
-	static final IEclipsePreferences PREFERENCES = InstanceScope.INSTANCE
+	IEclipsePreferences PREFERENCES = InstanceScope.INSTANCE
 			.getNode(FrameworkUtil.getBundle(Preference.class).getSymbolicName());
 
 	String getKey();

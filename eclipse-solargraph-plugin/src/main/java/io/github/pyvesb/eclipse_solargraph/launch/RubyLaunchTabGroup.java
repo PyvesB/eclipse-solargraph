@@ -15,13 +15,12 @@ package io.github.pyvesb.eclipse_solargraph.launch;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
-import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 public class RubyLaunchTabGroup extends AbstractLaunchConfigurationTabGroup {
 
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		setTabs(new ILaunchConfigurationTab[] { new RubyLaunchTab(), new CommonTab() });
+		setTabs(new RubyLaunchTab(), new CommonTab());
 
 	}
 
