@@ -68,7 +68,8 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		display.asyncExec(() -> {
 			MessageDialog dialog = new MessageDialog(display.getActiveShell(), "Readapt was not found", null,
 					"Readapt is required for debugging. Let Eclipse install the gem locally or specify its path "
-							+ "after running \"gem install readapt\" in a terminal.",
+							+ "after running \"gem install readapt\" in a terminal." + System.lineSeparator()
+							+ System.lineSeparator() + "Please restart the debug session once installation is complete.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
 			if (dialog.open() == 0) { // First button index, install.
 				GemHelper.install("Readapt", READAPT_PATH);
