@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2020 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,14 +18,27 @@ import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.READAPT_PATH;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.RUBY_DIR;
 
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -39,6 +52,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	private BooleanFieldEditor systemRubyFieldEditor;
 	private DirectoryFieldEditor rubyDirFieldEditor;
 	private Composite rubyDirFieldEditorParent;
+	private Image gitHubImage;
 
 	@Override
 	public void createFieldEditors() {
@@ -52,6 +66,17 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		rubyDirFieldEditor = new DirectoryFieldEditor(RUBY_DIR.getKey(), RUBY_DIR.getDesc(), rubyDirFieldEditorParent);
 		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getValue(), rubyDirFieldEditorParent);
 		addField(rubyDirFieldEditor);
+
+		Composite composite = new Composite(rubyDirFieldEditorParent.getParent(), SWT.NONE);
+		composite.setLayout(new RowLayout(SWT.HORIZONTAL));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 7));
+		URL url = FileLocator.find(FrameworkUtil.getBundle(getClass()), new Path("/icon/github.png"));
+		gitHubImage = ImageDescriptor.createFromURL(url).createImage();
+		new Label(composite, SWT.NONE).setImage(gitHubImage);
+		Link supportLink = new Link(composite, SWT.NONE);
+		supportLink.setText("Head over to <a href=\"https://github.com/PyvesB/eclipse-solargraph\">GitHub</a> for support. "
+				+ "Also feel free to star or fork the repository.");
+		supportLink.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> Program.launch(e.text)));
 	}
 
 	@Override
@@ -68,6 +93,14 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 			rubyDirFieldEditor.setEnabled(!systemRuby, rubyDirFieldEditorParent);
 		}
 		super.propertyChange(event);
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		if (gitHubImage != null) {
+			gitHubImage.dispose();
+		}
 	}
 
 }
