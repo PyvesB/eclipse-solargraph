@@ -19,12 +19,24 @@ jobs:
       run: mvn clean install
     - name: Commit files
       run: |
+        echo "Checking out update site"
         git checkout gh-pages
-        git rm -r .
-        cp -r eclipse-solargraph-updatesite/target/repository/. .
-        git config user.name ${{ github.actor }}
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
+        echo "Cleaning up previous files"
+        git rm -r artifacts.jar
+        git rm -r artifacts.xml.xz
+        git rm -r content.jar
+        git rm -r content.xml.xz
+        git rm -r features/*
+        git rm -r plugins/*
+        git rm -r eclipse-*
+        echo "Coping files over"
+        mv -v eclipse-solargraph-updatesite/target/repository/* .
+        echo "Setting up Git config"
+        git config user.name '${{ github.actor}}'
+        git config user.email '${{ github.actor}}@users.noreply.github.com'
+        echo "Preparing commit"
         git add -A
         git commit -m "Added version $(curl --silent https://api.github.com/repos/PyvesB/eclipse-solargraph/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/') to the update site"
         git remote add pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/PyvesB/eclipse-solargraph.git
+        echo "Pushing commit"
         git push pages gh-pages -f
