@@ -18,8 +18,8 @@
          point="org.eclipse.core.contenttype.contentTypes">
      <content-type
            base-type="org.eclipse.core.runtime.text"
-           file-extensions="rb,gemspec"
-           file-names="gemfile"
+           file-extensions="rb,gemspec,arb,builder,cgi,fcgi,god,irbrc,jbuilder,mspec,pluginspec,podspec,prawn,pryrc,rabl,rake,rbuild,rbw,rbx,rjs,ru,ruby,spec,thor,watchr"
+           file-names="gemfile,appfile,appraisals,berksfile,brewfile,capfile,deliverfile,fastfile,guardfile,podfile,puppetfile,rakefile,snapfile,thorfile,vagrantfile,dangerfile"
            id="io.github.pyvesb.eclipse_solargraph"
            name="Ruby"
            priority="high">
