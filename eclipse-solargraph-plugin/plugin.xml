@@ -31,6 +31,13 @@
            name="Gemfile"
            priority="high">
      </content-type>
+     <content-type
+           base-type="org.eclipse.core.runtime.text"
+           file-extensions="erb,rhtml,rhtm"
+           id="io.github.pyvesb.eclipse_solargraph.erb"
+           name="Embedded Ruby"
+           priority="high">
+     </content-type>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -40,6 +47,10 @@
       </editorContentTypeBinding>
       <editorContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+      <editorContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
             editorId="org.eclipse.ui.genericeditor.GenericEditor">
       </editorContentTypeBinding>
    </extension>
@@ -58,6 +69,10 @@
             contentType="io.github.pyvesb.eclipse_solargraph.gemfile"
             id="io.github.pyvesb.eclipse_solargraph">
          </contentTypeMapping>
+         <contentTypeMapping
+            contentType="io.github.pyvesb.eclipse_solargraph.erb"
+            id="io.github.pyvesb.eclipse_solargraph">
+         </contentTypeMapping>
    </extension>
    <extension
          point="org.eclipse.tm4e.registry.grammars">
@@ -69,6 +84,10 @@
             path="grammar/gemfile.tmLanguage.json"
             scopeName="source.ruby.gemfile">
       </grammar>
+      <grammar
+            path="grammar/erb.tmLanguage.json"
+            scopeName="text.html.erb">
+      </grammar>
       <scopeNameContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
             scopeName="source.ruby">
@@ -76,6 +95,10 @@
       <scopeNameContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
             scopeName="source.ruby.gemfile">
+      </scopeNameContentTypeBinding>
+      <scopeNameContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
+            scopeName="text.html.erb">
       </scopeNameContentTypeBinding>
    </extension>
    <extension
@@ -88,6 +111,10 @@
             class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
             contentType="io.github.pyvesb.eclipse_solargraph.gemfile">
       </presentationReconciler>
+      <presentationReconciler
+            class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
+            contentType="io.github.pyvesb.eclipse_solargraph.erb">
+      </presentationReconciler>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.icons">
@@ -99,16 +126,24 @@
             icon="icon/ruby-editor.png"
             contentType="io.github.pyvesb.eclipse_solargraph.gemfile">
       </icon>
+      <icon
+            icon="icon/erb-editor.png"
+            contentType="io.github.pyvesb.eclipse_solargraph.erb">
+      </icon>
    </extension>
    <extension
          point="org.eclipse.tm4e.languageconfiguration.languageConfigurations">
       <languageConfiguration
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
-            path="language-configuration/language-configuration.json">
+            path="language-configuration/ruby-configuration.json">
       </languageConfiguration>
       <languageConfiguration
             contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
-            path="language-configuration/language-configuration.json">
+            path="language-configuration/ruby-configuration.json">
+      </languageConfiguration>
+      <languageConfiguration
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
+            path="language-configuration/erb-configuration.json">
       </languageConfiguration>
    </extension>
    <extension
@@ -122,6 +157,11 @@
             name="Gemfile sample"
             path="snippet/Gemfile"
             scopeName="source.ruby.gemfile">
+      </snippet>
+      <snippet
+            name="Embedded Ruby sample"
+            path="snippet/sample.erb"
+            scopeName="text.html.erb">
       </snippet>
    </extension>
    <extension
