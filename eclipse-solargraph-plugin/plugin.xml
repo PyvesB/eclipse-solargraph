@@ -19,9 +19,16 @@
      <content-type
            base-type="org.eclipse.core.runtime.text"
            file-extensions="rb,gemspec,arb,builder,cgi,fcgi,god,irbrc,jbuilder,mspec,pluginspec,podspec,prawn,pryrc,rabl,rake,rbuild,rbw,rbx,rjs,ru,ruby,spec,thor,watchr"
-           file-names="gemfile,appfile,appraisals,berksfile,brewfile,capfile,deliverfile,fastfile,guardfile,podfile,puppetfile,rakefile,snapfile,thorfile,vagrantfile,dangerfile"
+           file-names="appfile,appraisals,berksfile,brewfile,capfile,deliverfile,fastfile,guardfile,podfile,puppetfile,rakefile,snapfile,thorfile,vagrantfile,dangerfile"
            id="io.github.pyvesb.eclipse_solargraph"
            name="Ruby"
+           priority="high">
+     </content-type>
+     <content-type
+           base-type="org.eclipse.core.runtime.text"
+           file-names="gemfile"
+           id="io.github.pyvesb.eclipse_solargraph.gemfile"
+           name="Gemfile"
            priority="high">
      </content-type>
    </extension>
@@ -29,6 +36,10 @@
          point="org.eclipse.ui.editors">
       <editorContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+      <editorContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
             editorId="org.eclipse.ui.genericeditor.GenericEditor">
       </editorContentTypeBinding>
    </extension>
@@ -43,6 +54,10 @@
             contentType="io.github.pyvesb.eclipse_solargraph"
             id="io.github.pyvesb.eclipse_solargraph">
          </contentTypeMapping>
+         <contentTypeMapping
+            contentType="io.github.pyvesb.eclipse_solargraph.gemfile"
+            id="io.github.pyvesb.eclipse_solargraph">
+         </contentTypeMapping>
    </extension>
    <extension
          point="org.eclipse.tm4e.registry.grammars">
@@ -50,9 +65,17 @@
             path="grammar/ruby.tmLanguage.json"
             scopeName="source.ruby">
       </grammar>
+      <grammar
+            path="grammar/gemfile.tmLanguage.json"
+            scopeName="source.ruby.gemfile">
+      </grammar>
       <scopeNameContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
             scopeName="source.ruby">
+      </scopeNameContentTypeBinding>
+      <scopeNameContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
+            scopeName="source.ruby.gemfile">
       </scopeNameContentTypeBinding>
    </extension>
    <extension
@@ -61,6 +84,10 @@
             class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
             contentType="io.github.pyvesb.eclipse_solargraph">
       </presentationReconciler>
+      <presentationReconciler
+            class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
+            contentType="io.github.pyvesb.eclipse_solargraph.gemfile">
+      </presentationReconciler>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.icons">
@@ -68,11 +95,19 @@
             icon="icon/ruby-editor.png"
             contentType="io.github.pyvesb.eclipse_solargraph">
       </icon>
+      <icon
+            icon="icon/ruby-editor.png"
+            contentType="io.github.pyvesb.eclipse_solargraph.gemfile">
+      </icon>
    </extension>
    <extension
          point="org.eclipse.tm4e.languageconfiguration.languageConfigurations">
       <languageConfiguration
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
+            path="language-configuration/language-configuration.json">
+      </languageConfiguration>
+      <languageConfiguration
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.gemfile"
             path="language-configuration/language-configuration.json">
       </languageConfiguration>
    </extension>
@@ -82,6 +117,11 @@
             name="Ruby sample"
             path="snippet/sample.rb"
             scopeName="source.ruby">
+      </snippet>
+      <snippet
+            name="Gemfile sample"
+            path="snippet/Gemfile"
+            scopeName="source.ruby.gemfile">
       </snippet>
    </extension>
    <extension
