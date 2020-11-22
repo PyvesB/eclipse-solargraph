@@ -123,7 +123,7 @@
             contentType="io.github.pyvesb.eclipse_solargraph">
       </icon>
       <icon
-            icon="icon/ruby-editor.png"
+            icon="icon/gemfile-editor.png"
             contentType="io.github.pyvesb.eclipse_solargraph.gemfile">
       </icon>
       <icon
