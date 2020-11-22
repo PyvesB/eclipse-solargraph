@@ -1,7 +1,8 @@
 {
+	"version": "https://github.com/rubyide/vscode-ruby/commit/b2bc8560c8bc98f17096792389cfa9d93e4e24eb",
 	"name": "HTML (Ruby - ERB)",
 	"scopeName": "text.html.erb",
-	"fileTypes": ["rhtml", "html.erb"],
+	"fileTypes": ["erb", "rhtml", "rhtm"],
 	"injections": {
 		"text.html.erb - (meta.embedded.block.erb | meta.embedded.line.erb | meta.tag | comment), L:meta.tag, L:source.js.embedded.html": {
 			"patterns": [
