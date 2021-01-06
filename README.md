@@ -70,7 +70,7 @@ Find the project useful or interesting? **Star** the repository by clicking on t
 
 ## :computer: Code contributions
 
-Want to make this plugin better, faster, stronger? Contributions are more than welcome, open a **pull request** and share your CSS!
+Want to make this plugin better, faster, stronger? Contributions are more than welcome, open a **pull request** and share your code!
 
 Setting up your own working copy of the project is easy:
 * Download the [RCP and RAP Developers](https://eclipse.org/downloads/eclipse-packages/) version of Eclipse.
