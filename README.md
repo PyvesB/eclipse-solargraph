@@ -44,7 +44,6 @@
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
 
-
 ## :cd: Plugin installation
 
 You can download and install the plugin via the [Eclipse Marketplace](https://marketplace.eclipse.org/content/ruby-solargraph/), or simply drag the below button to your running Eclipse workspace:
@@ -55,19 +54,19 @@ You can download and install the plugin via the [Eclipse Marketplace](https://ma
 
 Alternatively, head to the [update site](https://pyvesb.github.io/eclipse-solargraph/) and follow the instructions listed there.
 
+Once installed, the plugin will simply kick in when opening any Ruby file in Eclipse; there is no Ruby-specific project type or perspective.
+
 ## :sparkles: Tips and tricks
 
 To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
 
 You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
 
-
 ## :star: Support and feedback
 
 Found a problem or need some help? Simply open an [**issue**](https://github.com/PyvesB/eclipse-solargraph/issues)!
 
 Find the project useful or interesting? **Star** the repository by clicking on the icon on the top right of this page!
-
 
 ## :computer: Code contributions
 
@@ -81,7 +80,6 @@ Setting up your own working copy of the project is easy:
 * Ensure `Search for nested projects` is enabled, select all projects in the `Projects` field and click `Finish`.
 * Open `eclipse-solargraph-target-platform.target` and click `Set as Active Target Platform`.
 * You're ready to go! You can now either launch an instance of Eclipse running the plugin by right-clicking on the plugin project and selecting `Run As` -> `Eclipse Application`, or you can export a plugin archive file by selecting `Export` -> `Deployable plug-ins and fragments`.
-
 
 ## :balance_scale: License and acknowledgements
 
