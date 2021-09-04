@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2021 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,8 @@ package io.github.pyvesb.eclipse_solargraph.preferences;
 public enum BooleanPreferences implements Preference<Boolean> {
 
 	UPDATE_GEM("AutoUpdate", "Automatically update the Solargraph and Readapt gems", true),
-	SYSTEM_RUBY("SystemRuby", "Launch Ruby, Gem and Bundler commands using system path", true);
+	SYSTEM_RUBY("SystemRuby", "Launch Ruby, Gem and Bundler commands using system path", true),
+	DEBUG_READAPT("DebugReadapt", "Troubleshoot Readapt debugger by enabling adapter logs", false);
 
 	private final String key;
 	private final String desc;

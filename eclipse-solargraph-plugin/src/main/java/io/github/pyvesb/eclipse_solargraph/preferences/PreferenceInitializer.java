@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2021 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.DEBUG_READAPT;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
@@ -34,6 +35,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		defaultPreferences.put(READAPT_PATH.getKey(), READAPT_PATH.getDef());
 		defaultPreferences.putBoolean(UPDATE_GEM.getKey(), UPDATE_GEM.getDef());
 		defaultPreferences.putBoolean(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDef());
+		defaultPreferences.putBoolean(DEBUG_READAPT.getKey(), DEBUG_READAPT.getDef());
 		defaultPreferences.put(RUBY_DIR.getKey(), RUBY_DIR.getDef());
 	}
 

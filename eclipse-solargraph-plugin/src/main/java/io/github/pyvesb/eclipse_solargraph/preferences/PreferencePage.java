@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 Pierre-Yves B. and others.
+ * Copyright (c) 2020-2021 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.DEBUG_READAPT;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
@@ -66,6 +67,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		rubyDirFieldEditor = new DirectoryFieldEditor(RUBY_DIR.getKey(), RUBY_DIR.getDesc(), rubyDirFieldEditorParent);
 		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getValue(), rubyDirFieldEditorParent);
 		addField(rubyDirFieldEditor);
+		addField(new BooleanFieldEditor(DEBUG_READAPT.getKey(), DEBUG_READAPT.getDesc(), getFieldEditorParent()));
 
 		Composite composite = new Composite(rubyDirFieldEditorParent.getParent(), SWT.NONE);
 		composite.setLayout(new RowLayout(SWT.HORIZONTAL));

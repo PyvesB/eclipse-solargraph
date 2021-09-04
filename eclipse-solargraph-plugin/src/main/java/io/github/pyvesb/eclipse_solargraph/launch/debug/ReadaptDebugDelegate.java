@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2020 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2021 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch.debug;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.DEBUG_READAPT;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.READAPT_PATH;
 
@@ -55,6 +56,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
 		builder.setLaunchDebugAdapter("\"" + READAPT_PATH.getValue() + "\"", Collections.singletonList("stdio"));
+		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(parameters);
 		super.launch(builder);
 
