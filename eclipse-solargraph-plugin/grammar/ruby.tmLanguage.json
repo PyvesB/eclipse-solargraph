@@ -1,5 +1,5 @@
 {
-	"version": "https://github.com/microsoft/vscode/commit/3f1f36333d3453f67a36b6bfb1206e9159e9c4f0",
+	"version": "https://github.com/microsoft/vscode/commit/17e7a257ffc86a48318cefd8f3b904dc546a4314",
 	"name": "Ruby",
 	"scopeName": "source.ruby",
 	"fileTypes": [
@@ -480,7 +480,7 @@
 			]
 		},
 		{
-			"comment": "Needs higher precidence than regular expressions.",
+			"comment": "Needs higher precedence than regular expressions.",
 			"match": "(?<!\\()/=",
 			"name": "keyword.operator.assignment.augmented.ruby"
 		},
