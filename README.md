@@ -1,13 +1,4 @@
 # Eclipse Solargraph 
-<a href="https://github.com/PyvesB/eclipse-solargraph/blob/master/LICENSE">
-<img src ="https://img.shields.io/github/license/PyvesB/eclipse-solargraph.svg" />
-</a>
-<a href="https://github.com/PyvesB/eclipse-solargraph/issues">
-<img src ="https://img.shields.io/github/issues/PyvesB/eclipse-solargraph.svg" />
-</a>
-<a href="https://github.com/PyvesB/eclipse-solargraph/stargazers">
-<img src ="https://img.shields.io/github/stars/PyvesB/eclipse-solargraph.svg" />
-</a>
 <a href="https://marketplace.eclipse.org/content/ruby-solargraph">
 <img src ="https://img.shields.io/eclipse-marketplace/v/ruby-solargraph.svg" />
 </a>
