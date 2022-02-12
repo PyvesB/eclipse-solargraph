@@ -31,6 +31,7 @@
 * Run files as Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Various other features part of the Language Server Protocol
+* Support for Rails and web development with ERB files
 * Experimental debugger
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
@@ -49,9 +50,9 @@ Once installed, the plugin will simply kick in when opening any Ruby file in Ecl
 
 ## :sparkles: Tips and tricks
 
-To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
-
-You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
+* To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
+* You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
+* If you're doing web development and working on ERB files, it is recommended to also install the [Wild Web Developer](https://github.com/eclipse/wildwebdeveloper) plugin.
 
 ## :star: Support and feedback
 
