@@ -22,7 +22,7 @@ public enum StringPreferences implements Preference<String> {
 	private final String desc;
 	private final String def;
 
-	private StringPreferences(String key, String desc, String def) {
+	StringPreferences(String key, String desc, String def) {
 		this.key = key;
 		this.desc = desc;
 		this.def = def;

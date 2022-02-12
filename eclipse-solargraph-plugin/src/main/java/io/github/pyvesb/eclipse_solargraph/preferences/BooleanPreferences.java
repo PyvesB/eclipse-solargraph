@@ -22,7 +22,7 @@ public enum BooleanPreferences implements Preference<Boolean> {
 	private final String desc;
 	private final Boolean def;
 
-	private BooleanPreferences(String key, String desc, Boolean def) {
+	BooleanPreferences(String key, String desc, Boolean def) {
 		this.key = key;
 		this.desc = desc;
 		this.def = def;
