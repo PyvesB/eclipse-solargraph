@@ -1,0 +1,156 @@
+{
+	"version": "https://github.com/textmate/ruby-on-rails-tmbundle/commit/4efef9bfea373a26044f5dd69069cb68d6232baf",
+	"name": "JS (Ruby - ERB)",
+	"scopeName": "source.js.erb.rails",
+	"fileTypes": [
+		"js.erb"
+	],
+	"injections": {
+		"L:source.js.erb.rails - (meta.embedded.block.erb | meta.embedded.line.erb | comment)": {
+			"patterns": [
+				{
+					"begin": "(^\\s*)(?=<%+#(?![^%]*%>))",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.whitespace.comment.leading.erb"
+						}
+					},
+					"end": "(?!\\G)(\\s*$\\n)?",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.whitespace.comment.trailing.erb"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comment"
+						}
+					]
+				},
+				{
+					"begin": "(^\\s*)(?=<%(?![^%]*%>))",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.whitespace.embedded.leading.erb"
+						}
+					},
+					"end": "(?!\\G)(\\s*$\\n)?",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.whitespace.embedded.trailing.erb"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#tags"
+						}
+					]
+				},
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#tags"
+				}
+			]
+		}
+	},
+	"keyEquivalent": "^~J",
+	"name": "JavaScript (Rails)",
+	"patterns": [
+		{
+			"include": "source.js"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"begin": "<%+#",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.erb"
+						}
+					},
+					"end": "%>",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.erb"
+						}
+					},
+					"name": "comment.block.erb"
+				}
+			]
+		},
+		"tags": {
+			"patterns": [
+				{
+					"begin": "<%+(?!>)[-=]?(?![^%]*%>)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.begin.erb"
+						}
+					},
+					"contentName": "source.ruby",
+					"end": "(-?%)>",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.end.erb"
+						},
+						"1": {
+							"name": "source.ruby.rails"
+						}
+					},
+					"name": "meta.embedded.block.erb",
+					"patterns": [
+						{
+							"captures": {
+								"1": {
+									"name": "punctuation.definition.comment.erb"
+								}
+							},
+							"match": "(#).*?(?=-?%>)",
+							"name": "comment.line.number-sign.erb"
+						},
+						{
+							"include": "source.ruby.rails"
+						}
+					]
+				},
+				{
+					"begin": "<%+(?!>)[-=]?",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.begin.erb"
+						}
+					},
+					"contentName": "source.ruby",
+					"end": "(-?%)>",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.embedded.end.erb"
+						},
+						"1": {
+							"name": "source.ruby.rails.ruby"
+						}
+					},
+					"name": "meta.embedded.line.erb",
+					"patterns": [
+						{
+							"captures": {
+								"1": {
+									"name": "punctuation.definition.comment.erb"
+								}
+							},
+							"match": "(#).*?(?=-?%>)",
+							"name": "comment.line.number-sign.erb"
+						},
+						{
+							"include": "source.ruby.rails"
+						}
+					]
+				}
+			]
+		}
+	}
+}

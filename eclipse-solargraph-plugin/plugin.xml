@@ -33,9 +33,17 @@
      </content-type>
      <content-type
            base-type="org.eclipse.core.runtime.text"
-           file-extensions="erb,rhtml,rhtm"
-           id="io.github.pyvesb.eclipse_solargraph.erb"
-           name="Embedded Ruby"
+           file-extensions="rhtml,rhtm"
+           file-patterns="*.erb"
+           id="io.github.pyvesb.eclipse_solargraph.html_erb"
+           name="HTML Embedded Ruby"
+           priority="high">
+     </content-type>
+     <content-type
+           base-type="org.eclipse.core.runtime.text"
+           file-patterns="*.js.erb"
+           id="io.github.pyvesb.eclipse_solargraph.js_erb"
+           name="JS Embedded Ruby"
            priority="high">
      </content-type>
    </extension>
@@ -50,7 +58,11 @@
             editorId="org.eclipse.ui.genericeditor.GenericEditor">
       </editorContentTypeBinding>
       <editorContentTypeBinding
-            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.html_erb"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+      <editorContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.js_erb"
             editorId="org.eclipse.ui.genericeditor.GenericEditor">
       </editorContentTypeBinding>
    </extension>
@@ -70,7 +82,11 @@
             id="io.github.pyvesb.eclipse_solargraph">
          </contentTypeMapping>
          <contentTypeMapping
-            contentType="io.github.pyvesb.eclipse_solargraph.erb"
+            contentType="io.github.pyvesb.eclipse_solargraph.html_erb"
+            id="io.github.pyvesb.eclipse_solargraph">
+         </contentTypeMapping>
+         <contentTypeMapping
+            contentType="io.github.pyvesb.eclipse_solargraph.js_erb"
             id="io.github.pyvesb.eclipse_solargraph">
          </contentTypeMapping>
    </extension>
@@ -85,8 +101,12 @@
             scopeName="source.ruby.gemfile">
       </grammar>
       <grammar
-            path="grammar/erb.tmLanguage.json"
+            path="grammar/html_erb.tmLanguage.json"
             scopeName="text.html.erb">
+      </grammar>
+      <grammar
+            path="grammar/js_erb.tmLanguage.json"
+            scopeName="source.js.erb.rails">
       </grammar>
       <scopeNameContentTypeBinding
             contentTypeId="io.github.pyvesb.eclipse_solargraph"
@@ -97,8 +117,12 @@
             scopeName="source.ruby.gemfile">
       </scopeNameContentTypeBinding>
       <scopeNameContentTypeBinding
-            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.html_erb"
             scopeName="text.html.erb">
+      </scopeNameContentTypeBinding>
+      <scopeNameContentTypeBinding
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.js_erb"
+            scopeName="source.js.erb.rails">
       </scopeNameContentTypeBinding>
    </extension>
    <extension
@@ -113,7 +137,11 @@
       </presentationReconciler>
       <presentationReconciler
             class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
-            contentType="io.github.pyvesb.eclipse_solargraph.erb">
+            contentType="io.github.pyvesb.eclipse_solargraph.html_erb">
+      </presentationReconciler>
+      <presentationReconciler
+            class="org.eclipse.tm4e.ui.text.TMPresentationReconciler"
+            contentType="io.github.pyvesb.eclipse_solargraph.js_erb">
       </presentationReconciler>
    </extension>
    <extension
@@ -128,7 +156,11 @@
       </icon>
       <icon
             icon="icon/erb-editor.png"
-            contentType="io.github.pyvesb.eclipse_solargraph.erb">
+            contentType="io.github.pyvesb.eclipse_solargraph.html_erb">
+      </icon>
+      <icon
+            icon="icon/erb-editor.png"
+            contentType="io.github.pyvesb.eclipse_solargraph.js_erb">
       </icon>
    </extension>
    <extension
@@ -142,7 +174,11 @@
             path="language-configuration/ruby-configuration.json">
       </languageConfiguration>
       <languageConfiguration
-            contentTypeId="io.github.pyvesb.eclipse_solargraph.erb"
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.html_erb"
+            path="language-configuration/erb-configuration.json">
+      </languageConfiguration>
+      <languageConfiguration
+            contentTypeId="io.github.pyvesb.eclipse_solargraph.js_erb"
             path="language-configuration/erb-configuration.json">
       </languageConfiguration>
    </extension>
@@ -159,9 +195,14 @@
             scopeName="source.ruby.gemfile">
       </snippet>
       <snippet
-            name="Embedded Ruby sample"
-            path="snippet/sample.erb"
+            name="HTML Embedded Ruby sample"
+            path="snippet/sample.html.erb"
             scopeName="text.html.erb">
+      </snippet>
+      <snippet
+            name="JS Embedded Ruby sample"
+            path="snippet/sample.js.erb"
+            scopeName="source.js.erb.rails">
       </snippet>
    </extension>
    <extension
