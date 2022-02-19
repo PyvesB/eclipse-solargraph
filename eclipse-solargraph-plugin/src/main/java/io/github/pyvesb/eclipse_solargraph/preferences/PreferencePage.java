@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020-2021 Pierre-Yves B. and others.
+ * Copyright (c) 2020-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,6 +50,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	public static final String PAGE_ID = "io.github.pyvesb.eclipse_solargraph";
 
+	private FileFieldEditor gemPath;
+	private FileFieldEditor readaptPath;
 	private BooleanFieldEditor systemRubyFieldEditor;
 	private DirectoryFieldEditor rubyDirFieldEditor;
 	private Composite rubyDirFieldEditorParent;
@@ -57,8 +59,10 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	@Override
 	public void createFieldEditors() {
-		addField(new FileFieldEditor(GEM_PATH.getKey(), GEM_PATH.getDesc(), true, getFieldEditorParent()));
-		addField(new FileFieldEditor(READAPT_PATH.getKey(), READAPT_PATH.getDesc(), true, getFieldEditorParent()));
+		gemPath = new FileFieldEditor(GEM_PATH.getKey(), GEM_PATH.getDesc(), true, getFieldEditorParent());
+		addField(gemPath);
+		readaptPath = new FileFieldEditor(READAPT_PATH.getKey(), READAPT_PATH.getDesc(), true, getFieldEditorParent());
+		addField(readaptPath);
 		addField(new BooleanFieldEditor(UPDATE_GEM.getKey(), UPDATE_GEM.getDesc(), getFieldEditorParent()));
 		systemRubyFieldEditor = new BooleanFieldEditor(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDesc(), getFieldEditorParent());
 		addField(systemRubyFieldEditor);
@@ -103,6 +107,14 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		if (gitHubImage != null) {
 			gitHubImage.dispose();
 		}
+	}
+
+	public FileFieldEditor getGemPath() {
+		return gemPath;
+	}
+
+	public FileFieldEditor getReadaptPath() {
+		return readaptPath;
 	}
 
 }

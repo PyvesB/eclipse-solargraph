@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2020 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.lsp4e.server.ProcessStreamConnectionProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.PreferencesUtil;
@@ -65,15 +66,18 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	private void displayNotFoundWarning() {
 		Display display = Display.getDefault();
 		display.asyncExec(() -> {
-			MessageDialog dialog = new MessageDialog(display.getActiveShell(), "Solargraph was not found", null,
+			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Solargraph was not found", null,
 					"Key features will not be available. Let Eclipse install the gem locally or specify its path "
 							+ "after running \"gem install solargraph\" in a terminal.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
-			if (dialog.open() == 0) { // First button index, install.
+			if (notFoundDialog.open() == 0) { // First button index, install.
 				GemHelper.install("Solargraph", GEM_PATH);
 				HAS_UPDATED_SOLARGRAPH.set(true);
 			} else {
-				PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID, null, null).open();
+				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
+						null, null);
+				((PreferencePage) preferenceDialog.getSelectedPage()).getGemPath().setFocus();
+				preferenceDialog.open();
 			}
 		});
 	}

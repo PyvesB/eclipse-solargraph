@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2021 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.lsp4e.debug.launcher.DSPLaunchDelegate;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.PreferencesUtil;
@@ -68,16 +69,19 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 	private void displayNotFoundWarning() {
 		Display display = Display.getDefault();
 		display.asyncExec(() -> {
-			MessageDialog dialog = new MessageDialog(display.getActiveShell(), "Readapt was not found", null,
+			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Readapt was not found", null,
 					"Readapt is required for debugging. Let Eclipse install the gem locally or specify its path "
 							+ "after running \"gem install readapt\" in a terminal." + System.lineSeparator()
 							+ System.lineSeparator() + "Please restart the debug session once installation is complete.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
-			if (dialog.open() == 0) { // First button index, install.
+			if (notFoundDialog.open() == 0) { // First button index, install.
 				GemHelper.install("Readapt", READAPT_PATH);
 				HAS_UPDATED_READAPT.set(true);
 			} else {
-				PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID, null, null).open();
+				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
+						null, null);
+				((PreferencePage) preferenceDialog.getSelectedPage()).getReadaptPath().setFocus();
+				preferenceDialog.open();
 			}
 		});
 	}
