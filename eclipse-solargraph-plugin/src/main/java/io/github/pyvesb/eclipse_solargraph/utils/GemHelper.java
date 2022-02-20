@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,9 +19,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.osgi.framework.FrameworkUtil;
 
+import io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage;
 import io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences;
 
 public class GemHelper {
@@ -41,15 +46,12 @@ public class GemHelper {
 
 			@Override
 			public void done(IJobChangeEvent event) {
-				if (event.getResult() == Status.OK_STATUS) {
+				if (event.getResult() != Status.OK_STATUS) {
 					String extension = CommandHelper.isWindows() ? ".bat" : "";
 					String gemPath = getPluginStateLocation() + File.separator + lowerCaseGem + extension;
 					pathPreference.setValue(gemPath);
 				} else {
-					Display display = Display.getDefault();
-					display.asyncExec(() -> MessageDialog.openError(display.getActiveShell(), gem + " intallation failed",
-							"Please open the Error Log view for details. To manually install it, run \"gem install " + gem
-									+ "\" in a terminal and specify the path in the plugin's preferences."));
+					Display.getDefault().asyncExec(() -> displayInstallationError(gem));
 				}
 			}
 		});
@@ -63,6 +65,25 @@ public class GemHelper {
 
 	private static String getPluginStateLocation() {
 		return Platform.getStateLocation(FrameworkUtil.getBundle(GemHelper.class)).toOSString();
+	}
+
+	private static void displayInstallationError(String gem) {
+		MessageDialog errorDialog = new MessageDialog(Display.getDefault().getActiveShell(), gem + " installation failed",
+				null, "Please open the Error Log view for details. To manually install it, run \"gem install "
+						+ gem.toLowerCase() + "\" in a terminal and specify the path in the plugin's preferences.",
+				MessageDialog.ERROR, 0, "Open error logs", "Specify path");
+		if (errorDialog.open() == 0) { // First button index, open Error Log.
+			try {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+						.showView("org.eclipse.pde.runtime.LogView");
+			} catch (PartInitException e) {
+				LogHelper.error("Failed to open Error Log view.", e);
+			}
+		} else {
+			PreferenceDialog prefDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID, null, null);
+			((PreferencePage) prefDialog.getSelectedPage()).getPathField(gem).setFocus();
+			prefDialog.open();
+		}
 	}
 
 	private GemHelper() {
