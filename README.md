@@ -9,10 +9,9 @@
 <img src ="https://img.shields.io/eclipse-marketplace/dt/ruby-solargraph.svg" />
 </a>
 
-**Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
+**Ruby development tools combining the powers of the Eclipse IDE and the Solargraph language server!**
 
 <p align="center" style="font-size:6px;">
-<br />
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="32%" />
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/bundle-install.png?raw=true" width="32%" />
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="32%" />
@@ -26,14 +25,16 @@
 * Code completion
 * Documentation hovers
 * Rename refactoring
-* Find references
+* Find references and mark occurrences
 * Jump to declarations
 * Code outline
+* Compiler warnings based on Rubocop rules
+* Code formatting
+* Debugger with interactive console
 * Run files as Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
+* Support for web development with ERB Rails files
 * Various other features part of the Language Server Protocol
-* Support for Rails and web development with ERB files
-* Experimental debugger
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
 
@@ -51,8 +52,9 @@ Once installed, the plugin will simply kick in when opening any Ruby file in Ecl
 
 ## :sparkles: Tips and tricks
 
+* You can fine-tune Solargraph's behaviour by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
+* Similarly, you can fine-tune the code formatting and compiler warnings with a .rubocop.yml file.
 * To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
-* You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
 * If you're doing web development and working on ERB files, it is recommended to also install the [Wild Web Developer](https://github.com/eclipse/wildwebdeveloper) plugin.
 
 ## :date: Compatibility
