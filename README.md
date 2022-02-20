@@ -54,6 +54,12 @@ Once installed, the plugin will simply kick in when opening any Ruby file in Ecl
 * You can fine-tune Solargraph's behaviour on a per-project basis by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
 * If you're doing web development and working on ERB files, it is recommended to also install the [Wild Web Developer](https://github.com/eclipse/wildwebdeveloper) plugin.
 
+## :date: Compatibility
+
+This plugin requires Java 11 or more recent.
+
+The aim is to provide support for all Eclipse releases that are at up to two years old. Versions older than that may be dropped at any point without notice. That being said, the plugin should currently still work with Eclipse versions as old as 2019-03 (4.11).
+
 ## :star: Support and feedback
 
 Found a problem or need some help? Simply open an [**issue**](https://github.com/PyvesB/eclipse-solargraph/issues)!
