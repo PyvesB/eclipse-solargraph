@@ -17,7 +17,9 @@ import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -37,6 +39,11 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 
 	public SolargraphStreamConnectionProvider() {
 		super(getSolargraphCommand(), System.getProperty("user.dir"));
+	}
+
+	@Override
+	public Object getInitializationOptions(URI rootUri) {
+		return Map.of("diagnostics", true);
 	}
 
 	@Override
