@@ -76,7 +76,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 			} else {
 				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
 						null, null);
-				((PreferencePage) preferenceDialog.getSelectedPage()).getGemPath().setFocus();
+				((PreferencePage) preferenceDialog.getSelectedPage()).getPathField("solargraph").setFocus();
 				preferenceDialog.open();
 			}
 		});

@@ -113,12 +113,4 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		return "readapt".equalsIgnoreCase(gem) ? readaptPath : gemPath;
 	}
 
-	public FileFieldEditor getGemPath() {
-		return gemPath;
-	}
-
-	public FileFieldEditor getReadaptPath() {
-		return readaptPath;
-	}
-
 }

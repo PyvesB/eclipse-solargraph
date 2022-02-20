@@ -80,7 +80,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 			} else {
 				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
 						null, null);
-				((PreferencePage) preferenceDialog.getSelectedPage()).getReadaptPath().setFocus();
+				((PreferencePage) preferenceDialog.getSelectedPage()).getPathField("readapt").setFocus();
 				preferenceDialog.open();
 			}
 		});
