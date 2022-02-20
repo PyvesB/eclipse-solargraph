@@ -72,14 +72,15 @@ public class GemHelper {
 				null, "Please open the Error Log view for details. To manually install it, run \"gem install "
 						+ gem.toLowerCase() + "\" in a terminal and specify the path in the plugin's preferences.",
 				MessageDialog.ERROR, 0, "Open error logs", "Specify path");
-		if (errorDialog.open() == 0) { // First button index, open Error Log.
+		int buttonIndex = errorDialog.open();
+		if (buttonIndex == 0) {
 			try {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 						.showView("org.eclipse.pde.runtime.LogView");
 			} catch (PartInitException e) {
 				LogHelper.error("Failed to open Error Log view.", e);
 			}
-		} else {
+		} else if (buttonIndex == 1) {
 			PreferenceDialog prefDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID, null, null);
 			((PreferencePage) prefDialog.getSelectedPage()).getPathField(gem).setFocus();
 			prefDialog.open();

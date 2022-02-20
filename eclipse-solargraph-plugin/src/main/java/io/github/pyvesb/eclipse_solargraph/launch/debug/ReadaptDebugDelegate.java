@@ -74,10 +74,11 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 							+ "after running \"gem install readapt\" in a terminal." + System.lineSeparator()
 							+ System.lineSeparator() + "Please restart the debug session once installation is complete.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
-			if (notFoundDialog.open() == 0) { // First button index, install.
+			int buttonIndex = notFoundDialog.open();
+			if (buttonIndex == 0) {
 				GemHelper.install("Readapt", READAPT_PATH);
 				HAS_UPDATED_READAPT.set(true);
-			} else {
+			} else if (buttonIndex == 1) {
 				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
 						null, null);
 				((PreferencePage) preferenceDialog.getSelectedPage()).getPathField("readapt").setFocus();

@@ -70,10 +70,11 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 					"Key features will not be available. Let Eclipse install the gem locally or specify its path "
 							+ "after running \"gem install solargraph\" in a terminal.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
-			if (notFoundDialog.open() == 0) { // First button index, install.
+			int buttonIndex = notFoundDialog.open();
+			if (buttonIndex == 0) {
 				GemHelper.install("Solargraph", GEM_PATH);
 				HAS_UPDATED_SOLARGRAPH.set(true);
-			} else {
+			} else if (buttonIndex == 1) {
 				PreferenceDialog preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, PreferencePage.PAGE_ID,
 						null, null);
 				((PreferencePage) preferenceDialog.getSelectedPage()).getPathField("solargraph").setFocus();
