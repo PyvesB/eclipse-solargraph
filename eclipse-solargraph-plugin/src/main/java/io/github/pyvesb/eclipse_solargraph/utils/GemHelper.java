@@ -46,7 +46,7 @@ public class GemHelper {
 
 			@Override
 			public void done(IJobChangeEvent event) {
-				if (event.getResult() != Status.OK_STATUS) {
+				if (event.getResult() == Status.OK_STATUS) {
 					String extension = CommandHelper.isWindows() ? ".bat" : "";
 					String gemPath = getPluginStateLocation() + File.separator + lowerCaseGem + extension;
 					pathPreference.setValue(gemPath);
