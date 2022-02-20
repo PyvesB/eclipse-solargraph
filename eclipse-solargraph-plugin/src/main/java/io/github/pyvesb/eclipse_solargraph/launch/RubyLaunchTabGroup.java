@@ -21,7 +21,6 @@ public class RubyLaunchTabGroup extends AbstractLaunchConfigurationTabGroup {
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		setTabs(new RubyLaunchTab(), new CommonTab());
-
 	}
 
 }

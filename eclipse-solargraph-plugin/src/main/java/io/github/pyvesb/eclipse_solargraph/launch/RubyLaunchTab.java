@@ -50,13 +50,13 @@ public class RubyLaunchTab extends AbstractLaunchConfigurationTab {
 		Composite resComposite = new Composite(parent, SWT.NONE);
 		resComposite.setLayout(new GridLayout(2, false));
 		new Label(resComposite, SWT.NONE).setText("Ruby script");
-		this.programPathText = new Text(resComposite, SWT.BORDER);
-		this.programPathText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
+		programPathText = new Text(resComposite, SWT.BORDER);
+		programPathText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
 		ControlDecoration decoration = new ControlDecoration(programPathText, SWT.TOP | SWT.LEFT);
 		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault().getFieldDecoration(
 				FieldDecorationRegistry.DEC_ERROR);
 		decoration.setImage(fieldDecoration.getImage());
-		this.programPathText.addModifyListener(event -> {
+		programPathText.addModifyListener(event -> {
 			setDirty(true);
 			File file = new File(programPathText.getText());
 			if (!file.isFile()) {
@@ -76,16 +76,16 @@ public class RubyLaunchTab extends AbstractLaunchConfigurationTab {
 			updateLaunchConfigurationDialog();
 		});
 		new Label(resComposite, SWT.NONE).setText("Arguments");
-		this.argumentsText = new Text(resComposite, SWT.BORDER);
-		this.argumentsText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
-		this.argumentsText.addModifyListener(e -> {
+		argumentsText = new Text(resComposite, SWT.BORDER);
+		argumentsText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
+		argumentsText.addModifyListener(e -> {
 			setDirty(true);
 			updateLaunchConfigurationDialog();
 		});
 		new Label(resComposite, SWT.NONE).setText("Working directory");
-		this.workingDirectoryText = new Text(resComposite, SWT.BORDER);
-		this.workingDirectoryText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
-		this.workingDirectoryText.addModifyListener(e -> {
+		workingDirectoryText = new Text(resComposite, SWT.BORDER);
+		workingDirectoryText.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false));
+		workingDirectoryText.addModifyListener(e -> {
 			setDirty(true);
 			updateLaunchConfigurationDialog();
 		});
@@ -100,9 +100,9 @@ public class RubyLaunchTab extends AbstractLaunchConfigurationTab {
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			this.programPathText.setText(configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""));
-			this.argumentsText.setText(configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""));
-			this.workingDirectoryText.setText(configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""));
+			programPathText.setText(configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""));
+			argumentsText.setText(configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""));
+			workingDirectoryText.setText(configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""));
 		} catch (CoreException e) {
 			LogHelper.error("Exception whilst initializing launch configuration tab", e);
 		}
@@ -110,9 +110,9 @@ public class RubyLaunchTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(RubyLaunchShortcut.SCRIPT, this.programPathText.getText());
-		configuration.setAttribute(RubyLaunchShortcut.ARGUMENTS, this.argumentsText.getText());
-		configuration.setAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, this.workingDirectoryText.getText());
+		configuration.setAttribute(RubyLaunchShortcut.SCRIPT, programPathText.getText());
+		configuration.setAttribute(RubyLaunchShortcut.ARGUMENTS, argumentsText.getText());
+		configuration.setAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, workingDirectoryText.getText());
 	}
 
 	@Override

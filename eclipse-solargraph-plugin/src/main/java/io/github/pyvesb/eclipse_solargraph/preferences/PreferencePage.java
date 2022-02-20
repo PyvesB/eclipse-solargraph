@@ -108,7 +108,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 			gitHubImage.dispose();
 		}
 	}
-	
+
 	public FileFieldEditor getPathField(String gem) {
 		return "readapt".equalsIgnoreCase(gem) ? readaptPath : gemPath;
 	}
