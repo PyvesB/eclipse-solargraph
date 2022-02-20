@@ -12,13 +12,15 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import static io.github.pyvesb.eclipse_solargraph.utils.CommandHelper.isWindows;
+
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 
 public enum StringPreferences implements Preference<String> {
 
-	GEM_PATH("GemPath", "Solargraph executable:", CommandHelper.findPath("solargraph")),
+	GEM_PATH("GemPath", "Solargraph executable:", CommandHelper.findPath(isWindows() ? "solargraph.bat" : "solargraph")),
 	RUBY_DIR("RubyDir", "Ruby bin directory:", CommandHelper.findDirectory("ruby")),
-	READAPT_PATH("ReadaptPath", "Readapt executable:", CommandHelper.findPath("readapt"));
+	READAPT_PATH("ReadaptPath", "Readapt executable:", CommandHelper.findPath(isWindows() ? "readapt.bat" : "readapt"));
 
 	private final String key;
 	private final String desc;
