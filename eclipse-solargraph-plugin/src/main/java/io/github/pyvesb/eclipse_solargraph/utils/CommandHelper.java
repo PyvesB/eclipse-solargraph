@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,16 +15,46 @@ package io.github.pyvesb.eclipse_solargraph.utils;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.RUBY_DIR;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.eclipse.core.runtime.Platform;
 
 public class CommandHelper {
 
+	public static String findDirectory(String executable) {
+		String executablePath = findPath(executable);
+		if (executablePath != null) {
+			File executableDirectory = new File(executablePath).getParentFile();
+			if (executableDirectory != null && executableDirectory.isDirectory()) {
+				return executableDirectory.getAbsolutePath();
+			}
+		}
+		return null;
+	}
+
+	public static String findPath(String executable) {
+		String locationCommand = (isWindows() ? "where " : "which ") + executable;
+		try {
+			Process process = new ProcessBuilder(getPlatformCommand(locationCommand)).redirectErrorStream(true).start();
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+				String path = reader.readLine();
+				if (path != null && new File(path).exists()) {
+					return path;
+				}
+			}
+		} catch (IOException e) {
+			LogHelper.error("Failed to find location of " + executable, e);
+		}
+		return null;
+	}
+
 	public static String[] getAbsolutePlatformCommand(String command) {
 		if (!SYSTEM_RUBY.getValue()) {
 			String rubyDir = RUBY_DIR.getValue();
-			if (rubyDir.length() > 0) {
+			if (rubyDir != null && !rubyDir.isEmpty()) {
 				return CommandHelper.getPlatformCommand(rubyDir + File.separator + command);
 			}
 		}

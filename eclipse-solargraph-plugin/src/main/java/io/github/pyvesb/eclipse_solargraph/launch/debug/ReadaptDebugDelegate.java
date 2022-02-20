@@ -44,7 +44,8 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
-		if (!new File(READAPT_PATH.getValue()).exists()) {
+		String readaptPath = READAPT_PATH.getValue();
+		if (readaptPath == null || !new File(readaptPath).exists()) {
 			displayNotFoundWarning();
 			return;
 		}
@@ -56,7 +57,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		parameters.put("request", "launch");
 
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
-		builder.setLaunchDebugAdapter("\"" + READAPT_PATH.getValue() + "\"", Collections.singletonList("stdio"));
+		builder.setLaunchDebugAdapter("\"" + readaptPath + "\"", Collections.singletonList("stdio"));
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(parameters);
 		super.launch(builder);

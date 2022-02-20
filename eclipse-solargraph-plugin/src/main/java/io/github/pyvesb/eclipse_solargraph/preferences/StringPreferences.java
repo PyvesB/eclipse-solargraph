@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,11 +12,13 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
+
 public enum StringPreferences implements Preference<String> {
 
-	GEM_PATH("GemPath", "Solargraph executable:", ""),
-	RUBY_DIR("RubyDir", "Ruby bin directory:", ""),
-	READAPT_PATH("ReadaptPath", "Readapt executable:", "");
+	GEM_PATH("GemPath", "Solargraph executable:", CommandHelper.findPath("solargraph")),
+	RUBY_DIR("RubyDir", "Ruby bin directory:", CommandHelper.findDirectory("ruby")),
+	READAPT_PATH("ReadaptPath", "Readapt executable:", CommandHelper.findPath("readapt"));
 
 	private final String key;
 	private final String desc;
