@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2022 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,8 @@
  *  Pierre-Yves B.  (pyvesdev@gmail.com) - Initial implementation
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch.run;
+
+import java.io.File;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.jobs.Job;
@@ -27,16 +29,17 @@ public class BundleGemRunShortcut implements IResourceLaunchShortcut {
 	public void launchResource(IResource resource, String mode) {
 		Launch launch = new Launch(null, ILaunchManager.RUN_MODE, null);
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(launch);
-		String command = getBaseCommand(resource) + resource.getLocation().toOSString();
+		String command = getBaseCommand(resource);
 		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
+		File workingDirectory = resource.getLocation().removeLastSegments(1).toFile();
 		Job.create("Running " + command, r -> {
-			Process process = DebugPlugin.exec(absolutePlatformCommand, null);
+			Process process = DebugPlugin.exec(absolutePlatformCommand, workingDirectory);
 			DebugPlugin.newProcess(launch, process, command);
 		}).schedule();
 	}
 
 	private String getBaseCommand(IResource resource) {
-		return "Gemfile".equals(resource.getName()) ? "bundle install --gemfile=" : "gem build ";
+		return "Gemfile".equals(resource.getName()) ? "bundle install" : "gem build";
 	}
 
 }
