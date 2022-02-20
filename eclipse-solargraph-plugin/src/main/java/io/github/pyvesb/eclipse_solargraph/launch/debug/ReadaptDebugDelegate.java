@@ -17,8 +17,7 @@ import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.READAPT_PATH;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -50,16 +49,14 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 			return;
 		}
 
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("program", configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""));
-		parameters.put("runtimeArgs", configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""));
-		parameters.put("cwd", configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""));
-		parameters.put("request", "launch");
-
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
-		builder.setLaunchDebugAdapter("\"" + readaptPath + "\"", Collections.singletonList("stdio"));
+		builder.setLaunchDebugAdapter("\"" + readaptPath + "\"", List.of("stdio"));
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
-		builder.setDspParameters(parameters);
+		builder.setDspParameters(Map.of(
+				"program", configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""),
+				"runtimeArgs", configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""),
+				"cwd", configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""),
+				"request", "launch"));
 		super.launch(builder);
 
 		if (UPDATE_GEM.getValue() && !HAS_UPDATED_READAPT.getAndSet(true)) {

@@ -17,8 +17,6 @@ import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -59,9 +57,9 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	private static List<String> getSolargraphCommand() {
 		String gemPath = GEM_PATH.getValue();
 		if (gemPath != null && new File(gemPath).exists()) {
-			return Arrays.asList(CommandHelper.getPlatformCommand("\"" + gemPath + "\" stdio"));
+			return List.of(CommandHelper.getPlatformCommand("\"" + gemPath + "\" stdio"));
 		}
-		return Collections.emptyList();
+		return List.of();
 	}
 
 	private void displayNotFoundWarning() {
