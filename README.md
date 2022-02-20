@@ -11,12 +11,13 @@
 
 **Ruby plugin combining the powers of the Eclipse IDE and the Solargraph language server!**
 
-<p align="center" style="font-size:5px;">
+<p align="center" style="font-size:6px;">
 <br />
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="49%" />
-<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="49%" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/editor.png?raw=true" width="32%" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/bundle-install.png?raw=true" width="32%" />
+<img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="32%" />
 <br />
-<i><sub>Left: Ruby edition with syntax highlighting, autocomplete, docs, outline, references search and many other features! Right: debugging session!</sub></i>
+<i><sub>Left: Ruby edition with syntax highlighting, completions, docs, outline, references, diagnostics and many other features! Middle: bundle install on Gemfile. Right: debugging session with interactive console.</sub></i>
 </p>
 
 ## :gem: Features at a glance
