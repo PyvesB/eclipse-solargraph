@@ -16,7 +16,7 @@
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/bundle-install.png?raw=true" width="32%" />
 <img src ="https://github.com/PyvesB/eclipse-solargraph/blob/master/images/debugger.png?raw=true" width="32%" />
 <br />
-<i><sub>Left: Ruby edition with syntax highlighting, completions, docs, outline, references, diagnostics and many other features! Middle: bundle install on Gemfile. Right: debugging session with interactive console.</sub></i>
+<i><sub>Left: syntax highlighting, completions, docs, code outline, references, diagnostics and more! Middle: bundle install on Gemfile. Right: debugger with interactive console.</sub></i>
 </p>
 
 ## :gem: Features at a glance
@@ -29,9 +29,9 @@
 * Jump to declarations
 * Code outline
 * Compiler warnings based on Rubocop rules
-* Code formatting
-* Debugger with interactive console
-* Run files as Ruby scripts with customisable launch configurations
+* Code formatter
+* Interactive debugger
+* Run Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
 * Support for web development with ERB Rails files
 * Various other features part of the Language Server Protocol
@@ -40,7 +40,7 @@ Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-
 
 ## :cd: Plugin installation
 
-You can download and install the plugin via the [Eclipse Marketplace](https://marketplace.eclipse.org/content/ruby-solargraph/), or simply drag the below button to your running Eclipse workspace:
+You can install the plugin via **[the Eclipse Marketplace](https://marketplace.eclipse.org/content/ruby-solargraph/)**, or simply drag the following button to your running Eclipse window:
 
 <p align="center">
 <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=4611382" class="drag" title="Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client"><img style="width:80px;" typeof="foaf:Image" class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.svg" alt="Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client" /></a>
@@ -50,18 +50,18 @@ Alternatively, head to the [update site](https://pyvesb.github.io/eclipse-solarg
 
 Once installed, the plugin will simply kick in when opening any Ruby file in Eclipse; there is no Ruby-specific project type or perspective.
 
+## :date: Compatibility
+
+This plugin requires Java 11 or more recent.
+
+The aim is to provide support for all Eclipse releases that are at **up to two years old**. Versions older than that may be dropped at any point without notice. That being said, the plugin should currently still work with Eclipse versions as old as **2019-03** (4.11).
+
 ## :sparkles: Tips and tricks
 
 * You can fine-tune Solargraph's behaviour by [creating a .solargraph.yml configuration file](https://solargraph.org/guides/configuration).
 * Similarly, you can fine-tune the code formatting and compiler warnings with a .rubocop.yml file.
 * To improve code completion and intellisense, it is recommended to generate YARD documentation for your gems (run `yard gems` in a terminal).
-* If you're doing web development and working on ERB files, it is recommended to also install the [Wild Web Developer](https://github.com/eclipse/wildwebdeveloper) plugin.
-
-## :date: Compatibility
-
-This plugin requires Java 11 or more recent.
-
-The aim is to provide support for all Eclipse releases that are at up to two years old. Versions older than that may be dropped at any point without notice. That being said, the plugin should currently still work with Eclipse versions as old as 2019-03 (4.11).
+* For web development on ERB files, it is recommended to also install the [Wild Web Developer](https://github.com/eclipse/wildwebdeveloper) plugin.
 
 ## :star: Support and feedback
 
@@ -80,7 +80,7 @@ Setting up your own working copy of the project is easy:
 * In the `Select root directory` field, indicate the location where you checked out the eclipse-solargraph repository.
 * Ensure `Search for nested projects` is enabled, select all projects in the `Projects` field and click `Finish`.
 * Open `eclipse-solargraph-target-platform.target` and click `Set as Active Target Platform`.
-* You're ready to go! You can now either launch an instance of Eclipse running the plugin by right-clicking on the plugin project and selecting `Run As` -> `Eclipse Application`, or you can export a plugin archive file by selecting `Export` -> `Deployable plug-ins and fragments`.
+* You're ready to go! You can now either launch an Eclipse instance by right-clicking on the plugin project and selecting `Run As` -> `Eclipse Application`, or you can export a plugin archive file by selecting `Export` -> `Deployable plug-ins and fragments`.
 
 ## :balance_scale: License and acknowledgements
 
@@ -89,7 +89,6 @@ Eclipse Solargraph licensed under Eclipse Public License - v 2.0.
 The following projects are used by this plugin:
 * [Solargraph](http://solargraph.org/) by [castwide](https://github.com/castwide): underlying language server (MIT License) and adapted marketplace logo (CC BY-SA License).
 * [Readapt](https://github.com/castwide/readapt) by [castwide](https://github.com/castwide): debugger (MIT License).
-* [LSP4E](https://projects.eclipse.org/projects/technology.lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
-* [VS Code](https://code.visualstudio.com/): TextMate language configuration (MIT License).
-* [TM4E](https://projects.eclipse.org/projects/technology.tm4e): TextMate support in the Eclipse IDE (Eclipse Public License).
+* [LSP4E](https://github.com/eclipse/lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
+* [TextMate](https://github.com/textmate): Ruby language grammars (MIT License).
 * [Ruby](https://www.ruby-lang.org): launch shortcut logo (Creative Commons License).
