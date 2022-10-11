@@ -62,7 +62,6 @@ public class CommandHelper {
 	}
 
 	public static String[] getPlatformCommand(String command) {
-		// String tbd = System.get
 		return isWindows() ? new String[] { "cmd.exe", "/c", command } : new String[] { "bash", "-c", "-l", command };
 	}
 
