@@ -15,13 +15,12 @@ package io.github.pyvesb.eclipse_solargraph.launch.run;
 import java.io.File;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 
 import io.github.pyvesb.eclipse_solargraph.launch.IResourceLaunchShortcut;
-import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
+import io.github.pyvesb.eclipse_solargraph.utils.LaunchHelper;
 
 public class BundleGemRunShortcut implements IResourceLaunchShortcut {
 
@@ -30,12 +29,8 @@ public class BundleGemRunShortcut implements IResourceLaunchShortcut {
 		Launch launch = new Launch(null, ILaunchManager.RUN_MODE, null);
 		DebugPlugin.getDefault().getLaunchManager().addLaunch(launch);
 		String command = getBaseCommand(resource);
-		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
 		File workingDirectory = resource.getLocation().removeLastSegments(1).toFile();
-		Job.create("Running " + command, r -> {
-			Process process = DebugPlugin.exec(absolutePlatformCommand, workingDirectory);
-			DebugPlugin.newProcess(launch, process, command);
-		}).schedule();
+		LaunchHelper.createJob(launch, command, workingDirectory).schedule();
 	}
 
 	private String getBaseCommand(IResource resource) {

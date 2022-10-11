@@ -34,15 +34,19 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
 
 import io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut;
 import io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage;
+import io.github.pyvesb.eclipse_solargraph.utils.ConfigHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.GemHelper;
+import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
 public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 
 	private static final AtomicBoolean HAS_UPDATED_READAPT = new AtomicBoolean();
 
+	private static final List<String> READAPT_STDIO = List.of("stdio");
+	private static final Long READAPT_UPDATE_DELAY = 5000L;
+
 	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) {
 		String readaptPath = READAPT_PATH.getValue();
 		if (readaptPath == null || !new File(readaptPath).exists()) {
 			displayNotFoundWarning();
@@ -50,17 +54,23 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		}
 
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
-		builder.setLaunchDebugAdapter("\"" + readaptPath + "\"", List.of("stdio"));
+		builder.setLaunchDebugAdapter(readaptPath, READAPT_STDIO);
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(Map.of(
-				"program", configuration.getAttribute(RubyLaunchShortcut.SCRIPT, ""),
-				"runtimeArgs", configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, ""),
-				"cwd", configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, ""),
+				"program", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.SCRIPT),
+				"runtimeArgs", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.ARGUMENTS, ""),
+				"cwd", ConfigHelper.getConfigString(configuration, DebugPlugin.ATTR_WORKING_DIRECTORY, ""),
 				"request", "launch"));
-		super.launch(builder);
+		try {
+			super.launch(builder);
+		} catch (CoreException e) {
+			String msg = "Exception when launching readapt: " + readaptPath + " " + READAPT_STDIO;
+			LogHelper.error(msg);
+			return;
+		}
 
 		if (UPDATE_GEM.getValue() && !HAS_UPDATED_READAPT.getAndSet(true)) {
-			GemHelper.scheduleUpdate("Readapt", 5000L);
+			GemHelper.scheduleUpdate("Readapt", READAPT_UPDATE_DELAY);
 		}
 	}
 
