@@ -22,7 +22,7 @@ import org.osgi.framework.FrameworkUtil;
 public class LogHelper {
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(LogHelper.class);
-	private static String LOGNAME = BUNDLE.getSymbolicName();
+	private static final String LOGNAME = BUNDLE.getSymbolicName();
 	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
 	public static void log(int severity, String message) {
