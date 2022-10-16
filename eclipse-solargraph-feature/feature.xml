@@ -2,7 +2,7 @@
 <feature
       id="io.github.pyvesb.eclipse_solargraph"
       label="Ruby Solargraph"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="PyvesB">
 
    <description url="https://github.com/PyvesB/eclipse-solargraph">
@@ -297,7 +297,7 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="io.github.pyvesb.eclipse_solargraph"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="1.0.1"
          unpack="false"/>
 
 </feature>
