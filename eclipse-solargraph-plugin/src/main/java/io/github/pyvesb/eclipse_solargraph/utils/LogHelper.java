@@ -22,14 +22,31 @@ import org.osgi.framework.FrameworkUtil;
 public class LogHelper {
 
 	private static final Bundle BUNDLE = FrameworkUtil.getBundle(LogHelper.class);
+	private static final String LOGNAME = BUNDLE.getSymbolicName();
 	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
+	public static void log(int severity, String message) {
+		LOGGER.log(new Status(severity, LOGNAME, message));
+	}
+
+	public static void log(int severity, String message, Throwable throwable) {
+		LOGGER.log(new Status(severity, LOGNAME, message, throwable));
+	}
+
 	public static void info(String message) {
-		LOGGER.log(new Status(IStatus.INFO, BUNDLE.getSymbolicName(), message));
+		log(IStatus.INFO, message);
 	}
 
 	public static void error(String message, Throwable exception) {
-		LOGGER.log(new Status(IStatus.ERROR, BUNDLE.getSymbolicName(), message, exception));
+		log(IStatus.ERROR, message, exception);
+	}
+
+	public static void error(String message) {
+		log(IStatus.ERROR, message);
+	}
+
+	public static void cancelled(String message) {
+		log(IStatus.CANCEL, message);
 	}
 
 	private LogHelper() {

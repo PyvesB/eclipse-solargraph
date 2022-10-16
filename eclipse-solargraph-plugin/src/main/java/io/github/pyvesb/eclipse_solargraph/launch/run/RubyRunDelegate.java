@@ -14,33 +14,29 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch.run;
 
-import java.io.File;
-
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 
 import io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut;
-import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
+import io.github.pyvesb.eclipse_solargraph.utils.ConfigHelper;
+import io.github.pyvesb.eclipse_solargraph.utils.LaunchHelper;
 
 public class RubyRunDelegate extends LaunchConfigurationDelegate {
 
 	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
-		String script = configuration.getAttribute(RubyLaunchShortcut.SCRIPT, "");
-		String arguments = configuration.getAttribute(RubyLaunchShortcut.ARGUMENTS, "");
-		String workingDirectory = configuration.getAttribute(DebugPlugin.ATTR_WORKING_DIRECTORY, "");
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) {
+		String script = ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.SCRIPT);
+		String arguments = ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.ARGUMENTS);
+		String workingDirectory = ConfigHelper.getConfigString(configuration, DebugPlugin.ATTR_WORKING_DIRECTORY);
+		if (script == null || arguments == null || workingDirectory == null) {
+			// a config attribute reader threw exception & was logged
+			return;
+		}
 		String command = "ruby " + script + " " + arguments;
-		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
-		Job.create("Running " + command, r -> {
-			Process process = DebugPlugin.exec(absolutePlatformCommand, new File(workingDirectory));
-			DebugPlugin.newProcess(launch, process, command);
-		}).schedule();
+		LaunchHelper.createJob(launch, command, workingDirectory).schedule();
 	}
 
 }
