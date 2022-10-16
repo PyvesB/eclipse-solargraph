@@ -58,13 +58,13 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(Map.of(
 				"program", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.SCRIPT),
-				"runtimeArgs", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.ARGUMENTS, ""),
-				"cwd", ConfigHelper.getConfigString(configuration, DebugPlugin.ATTR_WORKING_DIRECTORY, ""),
+				"runtimeArgs", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.ARGUMENTS),
+				"cwd", ConfigHelper.getConfigString(configuration, DebugPlugin.ATTR_WORKING_DIRECTORY),
 				"request", "launch"));
 		try {
 			super.launch(builder);
 		} catch (CoreException e) {
-			String msg = "Exception when launching readapt: " + readaptPath + " " + READAPT_STDIO;
+			String msg = "Exception when launching readapt: " + readaptPath + " " + String.join(" ", READAPT_STDIO);
 			LogHelper.error(msg);
 			return;
 		}
