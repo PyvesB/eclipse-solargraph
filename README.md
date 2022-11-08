@@ -33,7 +33,7 @@
 * Interactive debugger
 * Run Ruby scripts with customisable launch configurations
 * Run `bundle install` on Gemfiles and `gem build` on gemspec files
-* Support for web development with ERB Rails files
+* Basic support for web development with ERB Rails files
 * Various other features part of the Language Server Protocol
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/eclipse-solargraph/releases)!
