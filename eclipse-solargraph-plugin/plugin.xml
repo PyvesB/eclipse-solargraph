@@ -81,14 +81,6 @@
             contentType="io.github.pyvesb.eclipse_solargraph.gemfile"
             id="io.github.pyvesb.eclipse_solargraph">
          </contentTypeMapping>
-         <contentTypeMapping
-            contentType="io.github.pyvesb.eclipse_solargraph.html_erb"
-            id="io.github.pyvesb.eclipse_solargraph">
-         </contentTypeMapping>
-         <contentTypeMapping
-            contentType="io.github.pyvesb.eclipse_solargraph.js_erb"
-            id="io.github.pyvesb.eclipse_solargraph">
-         </contentTypeMapping>
    </extension>
    <extension
          point="org.eclipse.tm4e.registry.grammars">
