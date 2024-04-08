@@ -56,7 +56,6 @@
 		}
 	},
 	"keyEquivalent": "^~J",
-	"name": "JavaScript (Rails)",
 	"patterns": [
 		{
 			"include": "source.js"
