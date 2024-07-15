@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Red Hat Inc. and others.
+ * Copyright (c) 2019-2024 Red Hat Inc. and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -11,6 +11,7 @@
  *  Alexander Kurtakov  (Red Hat Inc.) - Initial implementation
  *  Pierre-Yves B.  (pyvesdev@gmail.com) - Various improvements
  *  Pierre-Yves B.  (pyvesdev@gmail.com) - Debugger support
+ *  Pierre-Yves B.  (pyvesdev@gmail.com) - Quote script path
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.launch.run;
 
@@ -35,7 +36,7 @@ public class RubyRunDelegate extends LaunchConfigurationDelegate {
 			// a config attribute reader threw exception & was logged
 			return;
 		}
-		String command = "ruby " + script + " " + arguments;
+		String command = "ruby \"" + script + "\" " + arguments;
 		LaunchHelper.createJob(launch, command, workingDirectory).schedule();
 	}
 
