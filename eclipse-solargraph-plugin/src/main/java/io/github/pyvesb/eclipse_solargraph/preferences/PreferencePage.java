@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020-2022 Pierre-Yves B. and others.
+ * Copyright (c) 2020-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -80,8 +80,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		gitHubImage = ImageDescriptor.createFromURL(url).createImage();
 		new Label(composite, SWT.NONE).setImage(gitHubImage);
 		Link supportLink = new Link(composite, SWT.NONE);
-		supportLink.setText("Head over to <a href=\"https://github.com/PyvesB/eclipse-solargraph\">GitHub</a> for support. "
-				+ "Also feel free to star or fork the repository.");
+		supportLink.setText("Need support? Head over to <a href=\"https://github.com/PyvesB/eclipse-solargraph\">GitHub</a>! "
+				+ "If you find the plugin helpful, consider starring the repo ⭐");
 		supportLink.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> Program.launch(e.text)));
 	}
 
@@ -89,7 +89,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	public void init(IWorkbench workbench) {
 		Bundle bundle = FrameworkUtil.getBundle(this.getClass());
 		setPreferenceStore(new ScopedPreferenceStore(InstanceScope.INSTANCE, bundle.getSymbolicName()));
-		setDescription("Modify settings of the Ruby Solargraph plugin.");
+		setDescription("Settings for Ruby development tools:");
 	}
 
 	@Override

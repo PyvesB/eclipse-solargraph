@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2022 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -77,10 +77,11 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 	private void displayNotFoundWarning() {
 		Display display = Display.getDefault();
 		display.asyncExec(() -> {
-			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Readapt was not found", null,
-					"Readapt is required for debugging. Let Eclipse install the gem locally or specify its path "
+			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Readapt gem not found", null,
+					"Readapt is required for debugging. Let Eclipse install the gem locally, or specify its path "
 							+ "after running \"gem install readapt\" in a terminal." + System.lineSeparator()
-							+ System.lineSeparator() + "Please restart the debug session once installation is complete.",
+							+ System.lineSeparator()
+							+ "Please restart the debug session once the installation is complete.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
 			int buttonIndex = notFoundDialog.open();
 			if (buttonIndex == 0) {

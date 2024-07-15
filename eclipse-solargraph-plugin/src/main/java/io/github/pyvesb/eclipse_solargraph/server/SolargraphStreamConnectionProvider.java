@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2022 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -72,8 +72,8 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	private void displayNotFoundWarning() {
 		Display display = Display.getDefault();
 		display.asyncExec(() -> {
-			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Solargraph was not found", null,
-					"Key features will not be available. Let Eclipse install the gem locally or specify its path "
+			MessageDialog notFoundDialog = new MessageDialog(display.getActiveShell(), "Solargraph gem not found", null,
+					"Solargraph is required for key features. Let Eclipse install the gem locally, or specify its path "
 							+ "after running \"gem install solargraph\" in a terminal.",
 					MessageDialog.WARNING, 0, "Install gem", "Specify path");
 			int buttonIndex = notFoundDialog.open();

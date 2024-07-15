@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2022 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -69,9 +69,9 @@ public class GemHelper {
 
 	private static void displayInstallationError(String gem) {
 		MessageDialog errorDialog = new MessageDialog(Display.getDefault().getActiveShell(), gem + " installation failed",
-				null, "Please open the Error Log view for details. To manually install it, run \"gem install "
+				null, "Please check the Error Log view for details. To manually install it, run \"gem install "
 						+ gem.toLowerCase() + "\" in a terminal and specify the path in the plugin's preferences.",
-				MessageDialog.ERROR, 0, "Open error logs", "Specify path");
+				MessageDialog.ERROR, 0, "View error logs", "Specify path");
 		int buttonIndex = errorDialog.open();
 		if (buttonIndex == 0) {
 			try {
