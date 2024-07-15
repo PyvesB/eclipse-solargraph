@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019-2022 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,13 +26,13 @@ public class CommandHelper {
 
 	public static String findDirectory(String executable) {
 		String executablePath = findPath(executable);
-		if (executablePath != null) {
+		if (!executablePath.isEmpty()) {
 			File executableDirectory = new File(executablePath).getParentFile();
 			if (executableDirectory != null && executableDirectory.isDirectory()) {
 				return executableDirectory.getAbsolutePath();
 			}
 		}
-		return null;
+		return "";
 	}
 
 	public static String findPath(String executable) {
@@ -48,7 +48,7 @@ public class CommandHelper {
 		} catch (IOException e) {
 			LogHelper.error("Failed to find location of " + executable, e);
 		}
-		return null;
+		return "";
 	}
 
 	public static String[] getAbsolutePlatformCommand(String command) {
