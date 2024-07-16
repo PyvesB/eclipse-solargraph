@@ -34,6 +34,7 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
 
 import io.github.pyvesb.eclipse_solargraph.launch.RubyLaunchShortcut;
 import io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage;
+import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.ConfigHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.GemHelper;
 import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
@@ -42,7 +43,6 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 
 	private static final AtomicBoolean HAS_UPDATED_READAPT = new AtomicBoolean();
 
-	private static final List<String> READAPT_STDIO = List.of("stdio");
 	private static final Long READAPT_UPDATE_DELAY = 5000L;
 
 	@Override
@@ -54,7 +54,8 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		}
 
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
-		builder.setLaunchDebugAdapter(readaptPath, READAPT_STDIO);
+		List<String> readaptCommand = List.of(CommandHelper.getPlatformCommand("\"" + readaptPath + "\" stdio"));
+		builder.setLaunchDebugAdapter(readaptCommand.get(0), readaptCommand.subList(1, readaptCommand.size()));
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(Map.of(
 				"program", ConfigHelper.getConfigString(configuration, RubyLaunchShortcut.SCRIPT),
@@ -64,7 +65,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		try {
 			super.launch(builder);
 		} catch (CoreException e) {
-			String msg = "Exception when launching readapt: " + readaptPath + " " + String.join(" ", READAPT_STDIO);
+			String msg = "Exception when launching readapt: " + String.join(" ", readaptCommand);
 			LogHelper.error(msg);
 			return;
 		}
