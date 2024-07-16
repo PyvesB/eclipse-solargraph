@@ -54,7 +54,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		}
 
 		DSPLaunchDelegateLaunchBuilder builder = new DSPLaunchDelegateLaunchBuilder(configuration, mode, launch, monitor);
-		List<String> readaptCommand = List.of(CommandHelper.getPlatformCommand("\"" + readaptPath + "\" stdio"));
+		List<String> readaptCommand = CommandHelper.getPlatformCommand("\"" + readaptPath + "\" stdio");
 		builder.setLaunchDebugAdapter(readaptCommand.get(0), readaptCommand.subList(1, readaptCommand.size()));
 		builder.setMonitorDebugAdapter(DEBUG_READAPT.getValue());
 		builder.setDspParameters(Map.of(

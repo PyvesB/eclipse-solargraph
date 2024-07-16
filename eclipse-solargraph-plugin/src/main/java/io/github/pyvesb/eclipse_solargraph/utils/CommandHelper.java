@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.core.runtime.Platform;
@@ -62,7 +63,7 @@ public class CommandHelper {
 		return "";
 	}
 
-	public static String[] getAbsolutePlatformCommand(String command) {
+	public static List<String> getAbsolutePlatformCommand(String command) {
 		if (!SYSTEM_RUBY.getValue()) {
 			String rubyDir = RUBY_DIR.getValue();
 			if (rubyDir != null && !rubyDir.isEmpty()) {
@@ -72,18 +73,18 @@ public class CommandHelper {
 		return CommandHelper.getPlatformCommand(command);
 	}
 
-	public static String[] getPlatformCommand(String command) {
+	public static List<String> getPlatformCommand(String command) {
 		if (isWindows()) {
-			return new String[] { "cmd.exe", "/c", command };
+			return List.of("cmd.exe", "/c", command);
 		} else if (isMacOS()) {
 			String defaultShellMacOS = DEFAULT_SHELL_MACOS.get();
 			if (defaultShellMacOS == null) {
 				defaultShellMacOS = findDefaultShellMacOS();
 				DEFAULT_SHELL_MACOS.set(defaultShellMacOS);
 			}
-			return new String[] { defaultShellMacOS, "-c", "-li", command };
+			return List.of(defaultShellMacOS, "-c", "-li", command);
 		}
-		return new String[] { "bash", "-c", "-l", command };
+		return List.of("bash", "-c", "-l", command);
 	}
 
 	public static boolean isWindows() {

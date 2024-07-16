@@ -13,6 +13,7 @@
 package io.github.pyvesb.eclipse_solargraph.utils;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -34,7 +35,7 @@ public class GemHelper {
 	public static void install(String gem, StringPreferences pathPreference) {
 		String lowerCaseGem = gem.toLowerCase();
 		String command = String.format("gem install -V -n \"%s\" %s", getPluginStateLocation(), lowerCaseGem);
-		String[] platformCommand = CommandHelper.getPlatformCommand(command);
+		List<String> platformCommand = CommandHelper.getPlatformCommand(command);
 		CommandJob installCommandJob = new CommandJob(gem, platformCommand, "Installation in progress");
 
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
@@ -57,7 +58,7 @@ public class GemHelper {
 		String path = pathPreference.getValue();
 		String lowerCaseGem = gem.toLowerCase();
 		String command = String.format("gem update -V -n \"%s\" %s", path.substring(0, path.lastIndexOf(File.separator)), lowerCaseGem);
-		String[] plarformCommand = CommandHelper.getPlatformCommand(command);
+		List<String> plarformCommand = CommandHelper.getPlatformCommand(command);
 		new CommandJob(gem, plarformCommand, "Update in progress").schedule(delay);
 	}
 

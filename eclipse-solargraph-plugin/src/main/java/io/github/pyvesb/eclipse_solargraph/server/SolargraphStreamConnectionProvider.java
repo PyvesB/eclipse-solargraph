@@ -65,7 +65,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 	private static List<String> getSolargraphCommand() {
 		String gemPath = GEM_PATH.getValue();
 		if (gemPath != null && new File(gemPath).exists()) {
-			return List.of(CommandHelper.getPlatformCommand("\"" + gemPath + "\" stdio"));
+			return CommandHelper.getPlatformCommand("\"" + gemPath + "\" stdio");
 		}
 		return List.of();
 	}

@@ -1,6 +1,7 @@
 package io.github.pyvesb.eclipse_solargraph.utils;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.eclipse.core.runtime.CoreException;
@@ -16,10 +17,10 @@ public class LaunchHelper {
 	}
 
 	public static Job createJob(ILaunch launch, String command, File workingDirectory) {
-		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
+		List<String> absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
 		return Job.create("Running '" + command + "'", r -> {
 			try {
-				Process process = DebugPlugin.exec(absolutePlatformCommand, workingDirectory);
+				Process process = DebugPlugin.exec(absolutePlatformCommand.toArray(new String[0]), workingDirectory);
 				if (process == null) {
 					LogHelper.cancelled("Command cancelled: " + command);
 					return;

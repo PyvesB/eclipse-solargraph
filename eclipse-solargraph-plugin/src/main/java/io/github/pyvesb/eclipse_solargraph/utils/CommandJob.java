@@ -15,6 +15,7 @@ package io.github.pyvesb.eclipse_solargraph.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -26,11 +27,11 @@ import org.eclipse.core.runtime.jobs.Job;
 
 public class CommandJob extends Job {
 
-	private final String[] command;
+	private final List<String> command;
 	private final String description;
 	private volatile Process process;
 
-	public CommandJob(String gemName, String[] command, String description) {
+	public CommandJob(String gemName, List<String> command, String description) {
 		super(gemName);
 		this.command = command;
 		this.description = description;
