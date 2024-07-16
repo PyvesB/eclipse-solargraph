@@ -55,7 +55,8 @@ public class GemHelper {
 
 	public static void scheduleUpdate(String gem, long delay, StringPreferences pathPreference) {
 		String path = pathPreference.getValue();
-		String command = String.format("gem update -V -n \"%s\" %s", path.substring(0, path.lastIndexOf(File.separator)), gem);
+		String lowerCaseGem = gem.toLowerCase();
+		String command = String.format("gem update -V -n \"%s\" %s", path.substring(0, path.lastIndexOf(File.separator)), lowerCaseGem);
 		String[] plarformCommand = CommandHelper.getPlatformCommand(command);
 		new CommandJob(gem, plarformCommand, "Update in progress").schedule(delay);
 	}
