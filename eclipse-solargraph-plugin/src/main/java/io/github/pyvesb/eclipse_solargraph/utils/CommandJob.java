@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,7 +51,7 @@ public class CommandJob extends Job {
 				return Status.OK_STATUS;
 			} else {
 				LogHelper.error("Unexpected exit value " + exitValue + " from command " + commandString
-						+ System.lineSeparator() + "Error details:" + System.lineSeparator() + error.get(), null);
+						+ System.lineSeparator() + "Error details:" + System.lineSeparator() + error.get());
 			}
 		} catch (IOException | ExecutionException e) {
 			LogHelper.error("Exception whilst running command " + commandString, e);

@@ -65,8 +65,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		try {
 			super.launch(builder);
 		} catch (CoreException e) {
-			String msg = "Exception when launching readapt: " + String.join(" ", readaptCommand);
-			LogHelper.error(msg);
+			LogHelper.error("Exception when launching readapt: " + String.join(" ", readaptCommand), e);
 			return;
 		}
 

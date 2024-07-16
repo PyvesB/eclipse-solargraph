@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -38,14 +37,12 @@ public class LaunchHelper {
 					}
 					int exc = process.exitValue();
 					if (exc != 0) {
-						String msg = String.format("Process exited non-zero (%d): %s ", exc, command);
-						LogHelper.error(msg);
+						LogHelper.error(String.format("Process exited non-zero (%d): %s ", exc, command));
 					}
 				});
 				DebugPlugin.newProcess(launch, process, command);
 			} catch (CoreException e) {
-				// CoreException from exec
-				LogHelper.log(IStatus.ERROR, "Exception when launching process: " + command, e);
+				LogHelper.error("Exception when launching process: " + command, e);
 				return;
 			}
 		});

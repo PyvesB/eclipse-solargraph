@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Pierre-Yves B. and others.
+ * Copyright (c) 2019-2024 Pierre-Yves B. and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,28 +25,20 @@ public class LogHelper {
 	private static final String LOGNAME = BUNDLE.getSymbolicName();
 	private static final ILog LOGGER = Platform.getLog(BUNDLE);
 
-	public static void log(int severity, String message) {
-		LOGGER.log(new Status(severity, LOGNAME, message));
-	}
-
-	public static void log(int severity, String message, Throwable throwable) {
-		LOGGER.log(new Status(severity, LOGNAME, message, throwable));
-	}
-
 	public static void info(String message) {
-		log(IStatus.INFO, message);
+		LOGGER.log(new Status(IStatus.INFO, LOGNAME, message));
 	}
 
 	public static void error(String message, Throwable exception) {
-		log(IStatus.ERROR, message, exception);
+		LOGGER.log(new Status(IStatus.ERROR, LOGNAME, message, exception));
 	}
 
 	public static void error(String message) {
-		log(IStatus.ERROR, message);
+		LOGGER.log(new Status(IStatus.ERROR, LOGNAME, message));
 	}
 
 	public static void cancelled(String message) {
-		log(IStatus.CANCEL, message);
+		LOGGER.log(new Status(IStatus.CANCEL, LOGNAME, message));
 	}
 
 	private LogHelper() {
