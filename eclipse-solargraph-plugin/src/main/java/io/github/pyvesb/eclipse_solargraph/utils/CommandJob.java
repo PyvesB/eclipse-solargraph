@@ -15,7 +15,6 @@ package io.github.pyvesb.eclipse_solargraph.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -39,7 +38,7 @@ public class CommandJob extends Job {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		String commandString = List.of(command).toString();
+		String commandString = "'" + String.join(" ", command) + "'";
 		LogHelper.info("Running command " + commandString);
 		monitor.beginTask(description, IProgressMonitor.UNKNOWN);
 		try {
@@ -74,7 +73,7 @@ public class CommandJob extends Job {
 			try (BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 				inputReader.lines().forEachOrdered(monitor::subTask);
 			} catch (IOException e) {
-				LogHelper.error("Failed to read output from command " + commandString, e);
+				LogHelper.error("Failed to read output from command '" + commandString + "'", e);
 			}
 		});
 	}

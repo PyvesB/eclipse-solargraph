@@ -17,7 +17,7 @@ public class LaunchHelper {
 
 	public static Job createJob(ILaunch launch, String command, File workingDirectory) {
 		String[] absolutePlatformCommand = CommandHelper.getAbsolutePlatformCommand(command);
-		return Job.create("Running " + command, r -> {
+		return Job.create("Running '" + command + "'", r -> {
 			try {
 				Process process = DebugPlugin.exec(absolutePlatformCommand, workingDirectory);
 				if (process == null) {
