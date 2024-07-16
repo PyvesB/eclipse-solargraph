@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.osgi.framework.FrameworkUtil;
 
 public class CommandJob extends Job {
 
@@ -41,14 +42,15 @@ public class CommandJob extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		String commandString = "'" + String.join(" ", command) + "'";
 		LogHelper.info("Running command " + commandString);
-		monitor.beginTask(description, IProgressMonitor.UNKNOWN);
+		monitor.beginTask(description + " in progress", IProgressMonitor.UNKNOWN);
 		try {
 			process = new ProcessBuilder(command).start();
 			monitorOutput(monitor, commandString);
 			CompletableFuture<String> error = consumeError();
 			int exitValue = process.waitFor();
 			if (exitValue == 0) {
-				return Status.OK_STATUS;
+				String pluginId = FrameworkUtil.getBundle(LogHelper.class).getSymbolicName();
+				return new Status(IStatus.OK, pluginId, IStatus.OK, description + " completed successfully", null);
 			} else {
 				LogHelper.error("Unexpected exit value " + exitValue + " from command " + commandString
 						+ System.lineSeparator() + "Error details:" + System.lineSeparator() + error.get());

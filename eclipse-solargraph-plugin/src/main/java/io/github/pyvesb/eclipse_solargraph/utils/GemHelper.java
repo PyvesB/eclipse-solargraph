@@ -13,18 +13,22 @@
 package io.github.pyvesb.eclipse_solargraph.utils;
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferenceDialog;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.PreferencesUtil;
+import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.FrameworkUtil;
 
 import io.github.pyvesb.eclipse_solargraph.preferences.PreferencePage;
@@ -36,13 +40,16 @@ public class GemHelper {
 		String lowerCaseGem = gem.toLowerCase();
 		String command = String.format("gem install -V -n \"%s\" %s", getPluginStateLocation(), lowerCaseGem);
 		List<String> platformCommand = CommandHelper.getPlatformCommand(command);
-		CommandJob installCommandJob = new CommandJob(gem, platformCommand, "Installation in progress");
-
+		CommandJob installCommandJob = new CommandJob(gem, platformCommand, "Gem installation");
+		installCommandJob.setProperty(IProgressConstants.KEEP_PROPERTY, Boolean.TRUE);
+		URL url = FileLocator.find(FrameworkUtil.getBundle(GemHelper.class), new Path("/icon/ruby-launch.png"));
+		ImageDescriptor rubyImageDescriptor = ImageDescriptor.createFromURL(url);
+		installCommandJob.setProperty(IProgressConstants.ICON_PROPERTY, rubyImageDescriptor);
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
 
 			@Override
 			public void done(IJobChangeEvent event) {
-				if (event.getResult() == Status.OK_STATUS) {
+				if (event.getResult().isOK()) {
 					String extension = CommandHelper.isWindows() ? ".bat" : "";
 					String gemPath = getPluginStateLocation() + File.separator + lowerCaseGem + extension;
 					pathPreference.setValue(gemPath);
@@ -59,7 +66,11 @@ public class GemHelper {
 		String lowerCaseGem = gem.toLowerCase();
 		String command = String.format("gem update -V -n \"%s\" %s", path.substring(0, path.lastIndexOf(File.separator)), lowerCaseGem);
 		List<String> plarformCommand = CommandHelper.getPlatformCommand(command);
-		new CommandJob(gem, plarformCommand, "Update in progress").schedule(delay);
+		CommandJob commandJob = new CommandJob(gem, plarformCommand, "Gem update");
+		URL url = FileLocator.find(FrameworkUtil.getBundle(GemHelper.class), new Path("/icon/ruby-launch.png"));
+		ImageDescriptor rubyImageDescriptor = ImageDescriptor.createFromURL(url);
+		commandJob.setProperty(IProgressConstants.ICON_PROPERTY, rubyImageDescriptor);
+		commandJob.schedule(delay);
 	}
 
 	static String getPluginStateLocation() {
