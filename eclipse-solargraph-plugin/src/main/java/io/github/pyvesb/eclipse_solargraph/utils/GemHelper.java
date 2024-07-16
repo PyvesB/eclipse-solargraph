@@ -31,16 +31,11 @@ import io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences;
 
 public class GemHelper {
 
-	private static String buildGemCmd(String cmd, String lowerCaseGem) {
-		return String.format(
-				"gem %s -V -n \"%s\" %s",
-				cmd, getPluginStateLocation(), lowerCaseGem);
-	}
-
 	public static void install(String gem, StringPreferences pathPreference) {
 		String lowerCaseGem = gem.toLowerCase();
-		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("install", lowerCaseGem));
-		CommandJob installCommandJob = new CommandJob(gem, command, "Installation in progress");
+		String command = String.format("gem install -V -n \"%s\" %s", getPluginStateLocation(), lowerCaseGem);
+		String[] platformCommand = CommandHelper.getPlatformCommand(command);
+		CommandJob installCommandJob = new CommandJob(gem, platformCommand, "Installation in progress");
 
 		installCommandJob.addJobChangeListener(new JobChangeAdapter() {
 
@@ -58,9 +53,11 @@ public class GemHelper {
 		installCommandJob.schedule();
 	}
 
-	public static void scheduleUpdate(String gem, long delay) {
-		String[] command = CommandHelper.getPlatformCommand(buildGemCmd("update", gem));
-		new CommandJob(gem, command, "Update in progress").schedule(delay);
+	public static void scheduleUpdate(String gem, long delay, StringPreferences pathPreference) {
+		String path = pathPreference.getValue();
+		String command = String.format("gem update -V -n \"%s\" %s", path.substring(0, path.lastIndexOf(File.separator)), gem);
+		String[] plarformCommand = CommandHelper.getPlatformCommand(command);
+		new CommandJob(gem, plarformCommand, "Update in progress").schedule(delay);
 	}
 
 	private static String getPluginStateLocation() {

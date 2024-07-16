@@ -70,7 +70,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 		}
 
 		if (UPDATE_GEM.getValue() && !HAS_UPDATED_READAPT.getAndSet(true)) {
-			GemHelper.scheduleUpdate("Readapt", READAPT_UPDATE_DELAY);
+			GemHelper.scheduleUpdate("Readapt", READAPT_UPDATE_DELAY, READAPT_PATH);
 		}
 	}
 

@@ -57,7 +57,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 		}
 		super.start();
 		if (UPDATE_GEM.getValue() && !HAS_UPDATED_SOLARGRAPH.getAndSet(true)) {
-			GemHelper.scheduleUpdate("Solargraph", 30000L);
+			GemHelper.scheduleUpdate("Solargraph", 30000L, GEM_PATH);
 		}
 	}
 
