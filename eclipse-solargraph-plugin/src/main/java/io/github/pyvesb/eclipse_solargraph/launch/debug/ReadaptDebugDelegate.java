@@ -48,7 +48,7 @@ public class ReadaptDebugDelegate extends DSPLaunchDelegate {
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) {
 		String readaptPath = READAPT_PATH.getValue();
-		if (readaptPath == null || !new File(readaptPath).exists()) {
+		if (!new File(readaptPath).exists()) {
 			displayNotFoundWarning();
 			return;
 		}
