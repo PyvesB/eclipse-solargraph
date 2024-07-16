@@ -12,6 +12,10 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
+import org.osgi.service.prefs.BackingStoreException;
+
+import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
+
 public enum BooleanPreferences implements Preference<Boolean> {
 
 	UPDATE_GEM("AutoUpdate", "Automatically update gems", true),
@@ -51,6 +55,11 @@ public enum BooleanPreferences implements Preference<Boolean> {
 	@Override
 	public void setValue(Boolean value) {
 		PREFERENCES.putBoolean(key, value);
+		try {
+			PREFERENCES.sync();
+		} catch (BackingStoreException e) {
+			LogHelper.error("Exception whilst persisting preference " + this.getKey(), e);
+		}
 	}
 
 }

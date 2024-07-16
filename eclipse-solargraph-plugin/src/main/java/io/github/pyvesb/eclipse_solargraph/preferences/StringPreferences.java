@@ -14,7 +14,10 @@ package io.github.pyvesb.eclipse_solargraph.preferences;
 
 import static io.github.pyvesb.eclipse_solargraph.utils.CommandHelper.isWindows;
 
+import org.osgi.service.prefs.BackingStoreException;
+
 import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
+import io.github.pyvesb.eclipse_solargraph.utils.LogHelper;
 
 public enum StringPreferences implements Preference<String> {
 
@@ -55,6 +58,11 @@ public enum StringPreferences implements Preference<String> {
 	@Override
 	public void setValue(String value) {
 		PREFERENCES.put(key, value);
+		try {
+			PREFERENCES.sync();
+		} catch (BackingStoreException e) {
+			LogHelper.error("Exception whilst persisting preference " + this.getKey(), e);
+		}
 	}
 
 }
