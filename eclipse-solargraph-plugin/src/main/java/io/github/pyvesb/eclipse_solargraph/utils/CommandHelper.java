@@ -30,7 +30,7 @@ public class CommandHelper {
 	private static final AtomicReference<String> DEFAULT_SHELL_MACOS = new AtomicReference<>();
 
 	public static String findDirectory(String executable) {
-		String executablePath = findPath(executable);
+		String executablePath = findPath(executable, false);
 		if (!executablePath.isEmpty()) {
 			File executableDirectory = new File(executablePath).getParentFile();
 			if (executableDirectory != null && executableDirectory.isDirectory()) {
@@ -40,7 +40,13 @@ public class CommandHelper {
 		return "";
 	}
 
-	public static String findPath(String executable) {
+	public static String findPath(String executable, boolean searchInDefaultPluginLocation) {
+		if (searchInDefaultPluginLocation) {
+			String defaultPluginLocation = GemHelper.getPluginStateLocation() + File.separator + executable;
+			if (new File(defaultPluginLocation).exists()) {
+				return defaultPluginLocation;
+			}
+		}
 		String locationCommand = (isWindows() ? "where " : "which ") + executable;
 		try {
 			Process process = new ProcessBuilder(getPlatformCommand(locationCommand)).redirectErrorStream(true).start();

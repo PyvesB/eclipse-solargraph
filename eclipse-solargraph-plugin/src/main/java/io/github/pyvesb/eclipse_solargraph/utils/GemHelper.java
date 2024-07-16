@@ -60,7 +60,7 @@ public class GemHelper {
 		new CommandJob(gem, plarformCommand, "Update in progress").schedule(delay);
 	}
 
-	private static String getPluginStateLocation() {
+	static String getPluginStateLocation() {
 		return Platform.getStateLocation(FrameworkUtil.getBundle(GemHelper.class)).toOSString();
 	}
 
