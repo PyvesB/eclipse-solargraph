@@ -19,7 +19,7 @@ import io.github.pyvesb.eclipse_solargraph.utils.CommandHelper;
 public enum StringPreferences implements Preference<String> {
 
 	GEM_PATH("GemPath", "Solargraph executable:", CommandHelper.findPath(isWindows() ? "solargraph.bat" : "solargraph")),
-	RUBY_DIR("RubyDir", "Ruby bin directory for \"Run As\" launches:", CommandHelper.findDirectory("ruby")),
+	RUBY_DIR("RubyDir", "Override Ruby bin directory:", CommandHelper.findDirectory("ruby")),
 	READAPT_PATH("ReadaptPath", "Readapt executable:", CommandHelper.findPath(isWindows() ? "readapt.bat" : "readapt"));
 
 	private final String key;

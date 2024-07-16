@@ -24,7 +24,6 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -33,11 +32,14 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.IWorkbench;
@@ -59,23 +61,61 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	@Override
 	public void createFieldEditors() {
-		gemPath = new FileFieldEditor(GEM_PATH.getKey(), GEM_PATH.getDesc(), true, getFieldEditorParent());
+		Composite parent = getFieldEditorParent();
+		parent.setLayout(new GridLayout(1, false));
+		Font defaultFont = parent.getFont();
+
+		Group pathsGroup = new Group(parent, SWT.NONE);
+		pathsGroup.setText("Solargraph (language server) and Readapt (debugger) gems");
+		pathsGroup.setLayout(new GridLayout(3, false)); // 3 columns for label, input field, and browse button.
+		pathsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		Composite gemPathComposite = new Composite(pathsGroup, SWT.NONE);
+		gemPathComposite.setLayout(new GridLayout(3, false));
+		gemPathComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		gemPath = new FileFieldEditor(GEM_PATH.getKey(), GEM_PATH.getDesc(), gemPathComposite);
+		gemPath.getLabelControl(gemPathComposite).setFont(defaultFont);
 		addField(gemPath);
-		readaptPath = new FileFieldEditor(READAPT_PATH.getKey(), READAPT_PATH.getDesc(), true, getFieldEditorParent());
+		Composite readaptPathComposite = new Composite(pathsGroup, SWT.NONE);
+		readaptPathComposite.setLayout(new GridLayout(3, false));
+		readaptPathComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		readaptPath = new FileFieldEditor(READAPT_PATH.getKey(), READAPT_PATH.getDesc(), readaptPathComposite);
+		readaptPath.getLabelControl(readaptPathComposite).setFont(defaultFont);
 		addField(readaptPath);
-		addField(new BooleanFieldEditor(UPDATE_GEM.getKey(), UPDATE_GEM.getDesc(), getFieldEditorParent()));
-		systemRubyFieldEditor = new BooleanFieldEditor(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDesc(), getFieldEditorParent());
+		BooleanFieldEditor updateGemFieldEditor = new BooleanFieldEditor(UPDATE_GEM.getKey(), UPDATE_GEM.getDesc(),
+				pathsGroup);
+		updateGemFieldEditor.getDescriptionControl(pathsGroup).setFont(defaultFont);
+		addField(updateGemFieldEditor);
+
+		Group runAsGroup = new Group(parent, SWT.NONE);
+		runAsGroup.setText("Run *.rb, Gemfile, and *.gemspec files");
+		runAsGroup.setLayout(new GridLayout(1, false));
+		runAsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		systemRubyFieldEditor = new BooleanFieldEditor(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDesc(), runAsGroup);
+		systemRubyFieldEditor.getDescriptionControl(runAsGroup).setFont(defaultFont);
 		addField(systemRubyFieldEditor);
-		rubyDirFieldEditorParent = getFieldEditorParent();
-		GridDataFactory.fillDefaults().indent(30, 0).applyTo(rubyDirFieldEditorParent);
+		rubyDirFieldEditorParent = new Composite(runAsGroup, SWT.NONE);
+		rubyDirFieldEditorParent.setLayout(new GridLayout(3, false));
+		rubyDirFieldEditorParent.setFont(defaultFont);
+		GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		gridData.horizontalIndent = 30;
+		rubyDirFieldEditorParent.setLayoutData(gridData);
 		rubyDirFieldEditor = new DirectoryFieldEditor(RUBY_DIR.getKey(), RUBY_DIR.getDesc(), rubyDirFieldEditorParent);
+		rubyDirFieldEditor.getLabelControl(rubyDirFieldEditorParent).setFont(defaultFont);
 		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getValue(), rubyDirFieldEditorParent);
 		addField(rubyDirFieldEditor);
-		addField(new BooleanFieldEditor(DEBUG_READAPT.getKey(), DEBUG_READAPT.getDesc(), getFieldEditorParent()));
 
-		Composite composite = new Composite(rubyDirFieldEditorParent.getParent(), SWT.NONE);
+		Group optionsGroup = new Group(parent, SWT.NONE);
+		optionsGroup.setText("Miscellaneous");
+		optionsGroup.setLayout(new GridLayout(1, false));
+		optionsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		BooleanFieldEditor debugReadaptFieldEditor = new BooleanFieldEditor(DEBUG_READAPT.getKey(),
+				DEBUG_READAPT.getDesc(), optionsGroup);
+		debugReadaptFieldEditor.getDescriptionControl(optionsGroup).setFont(defaultFont);
+		addField(debugReadaptFieldEditor);
+
+		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new RowLayout(SWT.HORIZONTAL));
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 7));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 5));
 		URL url = FileLocator.find(FrameworkUtil.getBundle(getClass()), new Path("/icon/github.png"));
 		gitHubImage = ImageDescriptor.createFromURL(url).createImage();
 		new Label(composite, SWT.NONE).setImage(gitHubImage);
@@ -112,5 +152,4 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	public FileFieldEditor getPathField(String gem) {
 		return "readapt".equalsIgnoreCase(gem) ? readaptPath : gemPath;
 	}
-
 }

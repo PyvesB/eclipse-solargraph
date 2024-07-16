@@ -14,8 +14,8 @@ package io.github.pyvesb.eclipse_solargraph.preferences;
 
 public enum BooleanPreferences implements Preference<Boolean> {
 
-	UPDATE_GEM("AutoUpdate", "Automatically update the Solargraph and Readapt gems", true),
-	SYSTEM_RUBY("SystemRuby", "Use the Ruby installation from the PATH environment variable for \"Run As\" launches", true),
+	UPDATE_GEM("AutoUpdate", "Automatically update gems", true),
+	SYSTEM_RUBY("SystemRuby", "Launch files using the Ruby installation from the PATH environment variable", true),
 	DEBUG_READAPT("DebugReadapt", "Troubleshoot the Readapt debugger by adding an output to the Console view", false);
 
 	private final String key;
