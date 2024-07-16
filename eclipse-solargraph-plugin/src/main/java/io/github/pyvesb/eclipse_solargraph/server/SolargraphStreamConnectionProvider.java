@@ -36,6 +36,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 
 	private static final AtomicBoolean HAS_DISPLAYED_NOT_FOUND_WARNING = new AtomicBoolean();
 	private static final AtomicBoolean HAS_UPDATED_SOLARGRAPH = new AtomicBoolean();
+	private static final Long SOLARGRAPH_UPDATE_DELAY = 30000L;
 
 	public SolargraphStreamConnectionProvider() {
 		super(getSolargraphCommand(), System.getProperty("user.dir"));
@@ -57,7 +58,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 		}
 		super.start();
 		if (UPDATE_GEM.getValue() && !HAS_UPDATED_SOLARGRAPH.getAndSet(true)) {
-			GemHelper.scheduleUpdate("Solargraph", 30000L, GEM_PATH);
+			GemHelper.scheduleUpdate("Solargraph", SOLARGRAPH_UPDATE_DELAY, GEM_PATH);
 		}
 	}
 
