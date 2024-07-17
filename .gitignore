@@ -1,1 +1,4 @@
 target/
+bin/
+.polyglot.META-INF
+.polyglot.eclipse-solargraph-target-platform.target
