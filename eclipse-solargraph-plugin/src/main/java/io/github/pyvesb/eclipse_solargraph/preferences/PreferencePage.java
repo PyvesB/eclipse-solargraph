@@ -13,6 +13,7 @@
 package io.github.pyvesb.eclipse_solargraph.preferences;
 
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.DEBUG_READAPT;
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SOLARGRAPH_DIAGNOSTICS;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SYSTEM_RUBY;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
@@ -105,9 +106,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(rubyDirFieldEditor);
 
 		Group optionsGroup = new Group(parent, SWT.NONE);
-		optionsGroup.setText("Miscellaneous");
+		optionsGroup.setText("Other options");
 		optionsGroup.setLayout(new GridLayout(1, false));
 		optionsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		BooleanFieldEditor solargraphDiagnosticsFieldEditor = new BooleanFieldEditor(SOLARGRAPH_DIAGNOSTICS.getKey(),
+				SOLARGRAPH_DIAGNOSTICS.getDesc(), optionsGroup);
+		solargraphDiagnosticsFieldEditor.getDescriptionControl(optionsGroup).setFont(defaultFont);
+		addField(solargraphDiagnosticsFieldEditor);
 		BooleanFieldEditor debugReadaptFieldEditor = new BooleanFieldEditor(DEBUG_READAPT.getKey(),
 				DEBUG_READAPT.getDesc(), optionsGroup);
 		debugReadaptFieldEditor.getDescriptionControl(optionsGroup).setFont(defaultFont);

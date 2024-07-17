@@ -12,6 +12,7 @@
  *******************************************************************************/
 package io.github.pyvesb.eclipse_solargraph.server;
 
+import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.SOLARGRAPH_DIAGNOSTICS;
 import static io.github.pyvesb.eclipse_solargraph.preferences.BooleanPreferences.UPDATE_GEM;
 import static io.github.pyvesb.eclipse_solargraph.preferences.StringPreferences.GEM_PATH;
 
@@ -44,7 +45,7 @@ public class SolargraphStreamConnectionProvider extends ProcessStreamConnectionP
 
 	@Override
 	public Object getInitializationOptions(URI rootUri) {
-		return Map.of("diagnostics", true);
+		return Map.of("diagnostics", SOLARGRAPH_DIAGNOSTICS.getValue());
 	}
 
 	@Override

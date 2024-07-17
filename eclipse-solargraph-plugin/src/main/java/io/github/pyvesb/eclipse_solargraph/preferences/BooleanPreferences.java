@@ -20,7 +20,8 @@ public enum BooleanPreferences implements Preference<Boolean> {
 
 	UPDATE_GEM("AutoUpdate", "Automatically update gems", true),
 	SYSTEM_RUBY("SystemRuby", "Launch files using the Ruby installation from the PATH environment variable", true),
-	DEBUG_READAPT("DebugReadapt", "Troubleshoot the Readapt debugger by adding an output to the Console view", false);
+	DEBUG_READAPT("DebugReadapt", "Troubleshoot the Readapt debugger by adding an output to the Console view", false),
+	SOLARGRAPH_DIAGNOSTICS("SolargraphDiagnostics", "Display compiler warnings and other diagnostics (restart needed)", true);
 
 	private final String key;
 	private final String desc;
