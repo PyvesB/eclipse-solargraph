@@ -67,7 +67,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		Font defaultFont = parent.getFont();
 
 		Group pathsGroup = new Group(parent, SWT.NONE);
-		pathsGroup.setText("Solargraph (language server) and Readapt (debugger) gems");
+		pathsGroup.setText("Solargraph (language server) and Readapt (debugger) executables");
 		pathsGroup.setLayout(new GridLayout(3, false)); // 3 columns for label, input field, and browse button.
 		pathsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		Composite gemPathComposite = new Composite(pathsGroup, SWT.NONE);
