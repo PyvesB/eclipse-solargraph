@@ -59,7 +59,7 @@ public enum StringPreferences implements Preference<String> {
 	public void setValue(String value) {
 		PREFERENCES.put(key, value);
 		try {
-			PREFERENCES.sync();
+			PREFERENCES.flush();
 		} catch (BackingStoreException e) {
 			LogHelper.error("Exception whilst persisting preference " + this.getKey(), e);
 		}

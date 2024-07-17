@@ -57,7 +57,7 @@ public enum BooleanPreferences implements Preference<Boolean> {
 	public void setValue(Boolean value) {
 		PREFERENCES.putBoolean(key, value);
 		try {
-			PREFERENCES.sync();
+			PREFERENCES.flush();
 		} catch (BackingStoreException e) {
 			LogHelper.error("Exception whilst persisting preference " + this.getKey(), e);
 		}
