@@ -15,8 +15,10 @@
 		<module>eclipse-solargraph-updatesite</module>
 	</modules>
 	<properties>
+		<javase.version>JavaSE-11</javase.version>
+		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<tycho.version>2.7.0</tycho.version>
+		<tycho.version>3.0.5</tycho.version>
 	</properties>
 	<build>
 		<plugins>
@@ -31,7 +33,7 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<includePackedArtifacts>true</includePackedArtifacts>
+					<executionEnvironment>${javase.version}</executionEnvironment>
 					<target>
 						<artifact>
 							<groupId>io.github.pyvesb.eclipse_solargraph</groupId>
