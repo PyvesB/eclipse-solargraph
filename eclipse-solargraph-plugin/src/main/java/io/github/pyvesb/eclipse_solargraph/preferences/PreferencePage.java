@@ -125,8 +125,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		gitHubImage = ImageDescriptor.createFromURL(url).createImage();
 		new Label(composite, SWT.NONE).setImage(gitHubImage);
 		Link supportLink = new Link(composite, SWT.NONE);
-		supportLink.setText("Need support? Head over to <a href=\"https://github.com/PyvesB/eclipse-solargraph\">GitHub</a>! "
-				+ "If you find the plugin helpful, consider starring the repo ⭐");
+		supportLink.setText("Need support? Head over to <a href=\"https://github.com/PyvesB/eclipse-solargraph\">GitHub</a>, "
+				+ "and if you find the plugin helpful, consider starring the repo!");
 		supportLink.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> Program.launch(e.text)));
 	}
 
