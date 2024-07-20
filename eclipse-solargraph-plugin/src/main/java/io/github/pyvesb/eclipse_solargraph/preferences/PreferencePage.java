@@ -24,6 +24,7 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
@@ -62,14 +63,21 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	@Override
 	public void createFieldEditors() {
+		boolean isWindows = Platform.OS_WIN32.equals(Platform.getOS());
+		
 		Composite parent = getFieldEditorParent();
 		parent.setLayout(new GridLayout(1, false));
 		Font defaultFont = parent.getFont();
+
+		addPadding(parent, 1);
 
 		Group pathsGroup = new Group(parent, SWT.NONE);
 		pathsGroup.setText("Solargraph (language server) and Readapt (debugger) executables");
 		pathsGroup.setLayout(new GridLayout(3, false)); // 3 columns for label, input field, and browse button.
 		pathsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		if (isWindows) {
+			addPadding(pathsGroup, 3);
+		}
 		Composite gemPathComposite = new Composite(pathsGroup, SWT.NONE);
 		gemPathComposite.setLayout(new GridLayout(3, false));
 		gemPathComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
@@ -87,10 +95,15 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		updateGemFieldEditor.getDescriptionControl(pathsGroup).setFont(defaultFont);
 		addField(updateGemFieldEditor);
 
+		addPadding(parent, 1);
+
 		Group runAsGroup = new Group(parent, SWT.NONE);
 		runAsGroup.setText("Run *.rb, Gemfile, and *.gemspec files");
 		runAsGroup.setLayout(new GridLayout(1, false));
 		runAsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		if (isWindows) {
+			addPadding(runAsGroup, 1);
+		}
 		systemRubyFieldEditor = new BooleanFieldEditor(SYSTEM_RUBY.getKey(), SYSTEM_RUBY.getDesc(), runAsGroup);
 		systemRubyFieldEditor.getDescriptionControl(runAsGroup).setFont(defaultFont);
 		addField(systemRubyFieldEditor);
@@ -105,10 +118,15 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		rubyDirFieldEditor.setEnabled(!SYSTEM_RUBY.getValue(), rubyDirFieldEditorParent);
 		addField(rubyDirFieldEditor);
 
+		addPadding(parent, 1);
+
 		Group optionsGroup = new Group(parent, SWT.NONE);
 		optionsGroup.setText("Other options");
 		optionsGroup.setLayout(new GridLayout(1, false));
 		optionsGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		if (isWindows) {
+			addPadding(optionsGroup, 1);
+		}
 		BooleanFieldEditor solargraphDiagnosticsFieldEditor = new BooleanFieldEditor(SOLARGRAPH_DIAGNOSTICS.getKey(),
 				SOLARGRAPH_DIAGNOSTICS.getDesc(), optionsGroup);
 		solargraphDiagnosticsFieldEditor.getDescriptionControl(optionsGroup).setFont(defaultFont);
@@ -117,6 +135,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 				DEBUG_READAPT.getDesc(), optionsGroup);
 		debugReadaptFieldEditor.getDescriptionControl(optionsGroup).setFont(defaultFont);
 		addField(debugReadaptFieldEditor);
+
+		addPadding(parent, 1);
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new RowLayout(SWT.HORIZONTAL));
@@ -156,5 +176,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 	public FileFieldEditor getPathField(String gem) {
 		return "readapt".equalsIgnoreCase(gem) ? readaptPath : gemPath;
+	}
+
+	private void addPadding(Composite composite, int columns) {
+		Label spacer = new Label(composite, SWT.NONE);
+		GridData spacerData = new GridData();
+		spacerData.horizontalSpan = columns;
+		spacerData.heightHint = 2;
+		spacer.setLayoutData(spacerData);
 	}
 }
