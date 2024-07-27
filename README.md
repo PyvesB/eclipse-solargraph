@@ -90,5 +90,5 @@ The following projects are used by this plugin:
 * [Solargraph](http://solargraph.org/) by [castwide](https://github.com/castwide): underlying language server (MIT License) and adapted marketplace logo (CC BY-SA License).
 * [Readapt](https://github.com/castwide/readapt) by [castwide](https://github.com/castwide): debugger (MIT License).
 * [LSP4E](https://github.com/eclipse/lsp4e): Language Server Protocol support in the Eclipse IDE (Eclipse Public License).
-* [TextMate](https://github.com/textmate): Ruby language grammars (MIT License).
+* [Ruby LSP](https://github.com/Shopify/ruby-lsp) by Shopify: Ruby language grammars (MIT License).
 * [Ruby](https://www.ruby-lang.org): launch shortcut logo (Creative Commons License).
